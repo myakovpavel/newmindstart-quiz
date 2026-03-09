@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>NewMindStart | Персональный квиз</title>
+    <meta
+      name="description"
+      content="Персональный квиз NewMindStart: оцените фокус, энергию и эмоциональный баланс, чтобы получить персональный план."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700;800&family=Manrope:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="page-glow page-glow--left"></div>
+    <div class="page-glow page-glow--right"></div>
+    <main class="quiz-shell">
+      <header class="quiz-header">
+        <button
+          id="backButton"
+          class="back-button"
+          aria-label="Назад"
+          type="button"
+        >
+          &#8592;
+        </button>
+        <div class="brand">
+          <span class="brand-mark">&#10048;</span>
+          <span class="brand-text">NEWMINDSTART</span>
+        </div>
+        <div class="progress-wrap" aria-hidden="true">
+          <div class="progress-track">
+            <div id="progressBar" class="progress-fill"></div>
+          </div>
+          <span id="progressText" class="progress-text">0%</span>
+        </div>
+      </header>
+
+      <section id="app" class="quiz-card"></section>
+    </main>
+
+    <script src="./app.js"></script>
+  </body>
+</html>
