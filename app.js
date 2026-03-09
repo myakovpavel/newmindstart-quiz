@@ -479,6 +479,149 @@ const insightMap = {
   },
 };
 
+const questionArtMap = {
+  age: {
+    image:
+      "https://images.unsplash.com/photo-1517486808906-6ca8b3f04846?auto=format&fit=crop&w=1200&q=80",
+    label: "Personalized by life stage",
+  },
+  energy_after_rest: {
+    image:
+      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=1200&q=80",
+    label: "Daily energy",
+  },
+  deadline_delay: {
+    image:
+      "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1200&q=80",
+    label: "Focus habits",
+  },
+  distracted_level: {
+    image:
+      "https://images.unsplash.com/photo-1517048676732-d65bc937f952?auto=format&fit=crop&w=1200&q=80",
+    label: "Attention pattern",
+  },
+  overwhelm_feeling: {
+    image:
+      "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=80",
+    label: "Stress rhythm",
+  },
+  mood_swings: {
+    image:
+      "https://images.unsplash.com/photo-1494790108755-2616b612b786?auto=format&fit=crop&w=1200&q=80",
+    label: "Emotional balance",
+  },
+  inner_harmony: {
+    image:
+      "https://images.unsplash.com/photo-1511988617509-a57c8a288659?auto=format&fit=crop&w=1200&q=80",
+    label: "Inner alignment",
+  },
+  statement_emotions: {
+    image:
+      "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=1200&q=80",
+    label: "Emotional openness",
+  },
+  statement_tasks: {
+    image:
+      "https://images.unsplash.com/photo-1494172961521-33799ddd43a5?auto=format&fit=crop&w=1200&q=80",
+    label: "Mental load",
+  },
+  statement_decisions: {
+    image:
+      "https://images.unsplash.com/photo-1524502397800-2eeaad7c3fe5?auto=format&fit=crop&w=1200&q=80",
+    label: "Decision confidence",
+  },
+  statement_fear_fail: {
+    image:
+      "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&w=1200&q=80",
+    label: "Self trust",
+  },
+  compliments: {
+    image:
+      "https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&w=1200&q=80",
+    label: "Self worth",
+  },
+  social_insecurity: {
+    image:
+      "https://images.unsplash.com/photo-1524503033411-c9566986fc8f?auto=format&fit=crop&w=1200&q=80",
+    label: "Social ease",
+  },
+  overthinking_partner: {
+    image:
+      "https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?auto=format&fit=crop&w=1200&q=80",
+    label: "Relationship pattern",
+  },
+  others_first: {
+    image:
+      "https://images.unsplash.com/photo-1517457373958-b7bdd4587205?auto=format&fit=crop&w=1200&q=80",
+    label: "Boundaries",
+  },
+  last_motivation: {
+    image:
+      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=1200&q=80",
+    label: "Motivation",
+  },
+  improve_areas: {
+    image:
+      "https://images.unsplash.com/photo-1511988617509-a57c8a288659?auto=format&fit=crop&w=1200&q=80",
+    label: "Growth areas",
+  },
+  morning_first: {
+    image:
+      "https://images.unsplash.com/photo-1494390248081-4e521a5940db?auto=format&fit=crop&w=1200&q=80",
+    label: "Morning rhythm",
+  },
+  physical_activity: {
+    image:
+      "https://images.unsplash.com/photo-1518611012118-696072aa579a?auto=format&fit=crop&w=1200&q=80",
+    label: "Movement",
+  },
+  quit_habits: {
+    image:
+      "https://images.unsplash.com/photo-1494173853739-c21f58b16055?auto=format&fit=crop&w=1200&q=80",
+    label: "Habit reset",
+  },
+  sleep_improve: {
+    image:
+      "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=1200&q=80",
+    label: "Sleep",
+  },
+  recent_triggers: {
+    image:
+      "https://images.unsplash.com/photo-1519834785169-98be25ec3f84?auto=format&fit=crop&w=1200&q=80",
+    label: "Pressure points",
+  },
+  happier_life: {
+    image:
+      "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=1200&q=80",
+    label: "What matters most",
+  },
+  plan_targets: {
+    image:
+      "https://images.unsplash.com/photo-1508672019048-805c876b67e2?auto=format&fit=crop&w=1200&q=80",
+    label: "Plan direction",
+  },
+  behavior_knowledge: {
+    image:
+      "https://images.unsplash.com/photo-1517048676732-d65bc937f952?auto=format&fit=crop&w=1200&q=80",
+    label: "Behavior tools",
+  },
+  heard_expert: {
+    image:
+      "https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=1200&q=80",
+    label: "Guided choice",
+  },
+  daily_goal: {
+    image:
+      "https://images.unsplash.com/photo-1499750310107-5fef28a66643?auto=format&fit=crop&w=1200&q=80",
+    label: "Daily commitment",
+  },
+  newsletter: {
+    image:
+      "https://images.unsplash.com/photo-1516321165247-4aa89a48be28?auto=format&fit=crop&w=1200&q=80",
+    label: "Weekly support",
+  },
+};
+
 function getCurrentStep() {
   return steps[state.currentStepIndex];
 }
@@ -530,6 +673,18 @@ function renderOptions(step) {
           `;
         })
         .join("")}
+    </div>
+  `;
+}
+
+function renderQuestionVisual(step) {
+  const art = questionArtMap[step.id];
+  if (!art) return "";
+
+  return `
+    <div class="question-visual" aria-hidden="true">
+      <img class="question-visual-image" src="${escapeHtml(art.image)}" alt="" />
+      <div class="question-visual-chip">${escapeHtml(art.label)}</div>
     </div>
   `;
 }
@@ -611,6 +766,7 @@ function renderQuestionStep(step) {
         ${renderStepMeta(step)}
         <h2 class="question-title">${escapeHtml(step.question)}</h2>
         ${step.description ? `<p class="question-description">${escapeHtml(step.description)}</p>` : ""}
+        ${renderQuestionVisual(step)}
         ${renderOptions(step)}
         ${renderNavigation(step)}
       </div>
@@ -824,16 +980,68 @@ function renderFinalStep() {
   return `
     <article class="step">
       <div class="content-stack">
-        <div class="step-meta">All set</div>
-        <h2 class="question-title">Your NewMindStart quiz is ready, ${escapeHtml(name)}.</h2>
-        <p class="final-note">
-          Your personalized starter profile is linked to <strong>${escapeHtml(email)}</strong>. This version is optimized for a polished mobile-first experience and a cleaner premium visual system.
-        </p>
-        <p class="note-inline">
-          Next natural step: connect the form to a real email flow, CRM, or checkout if you want to turn this into a production funnel.
-        </p>
-        <div class="step-actions">
-          <button type="button" class="btn btn-primary" data-action="restart">Start again</button>
+        <div class="offer-hero">
+          <div class="offer-copy">
+            <div class="step-meta">All access offer</div>
+            <h2 class="question-title">Unlock every NewMindStart course, ${escapeHtml(name)}.</h2>
+            <p class="final-note">
+              Your personalized profile is ready and connected to <strong>${escapeHtml(email)}</strong>. The next step is full access to the complete NewMindStart library: mind, body, emotional balance, sleep, focus, and guided routines in one subscription.
+            </p>
+            <div class="offer-badges">
+              <span class="footer-badge">290+ guided courses</span>
+              <span class="footer-badge">Daily programs and resets</span>
+              <span class="footer-badge">Designed for mobile first</span>
+            </div>
+          </div>
+          <div class="offer-card">
+            <div class="offer-card-top">
+              <span class="offer-label">Best value</span>
+              <div class="offer-price">
+                <strong>$5.90</strong>
+                <span>for your first 7 days</span>
+              </div>
+              <p class="offer-price-note">Then $34.99 every 4 weeks. Cancel anytime.</p>
+            </div>
+            <button type="button" class="btn btn-primary offer-cta">Start 7-day trial</button>
+            <p class="offer-security">Secure checkout. Instant access on mobile and desktop.</p>
+          </div>
+        </div>
+
+        <div class="offer-grid">
+          <article class="offer-panel">
+            <h3>What is included</h3>
+            <ul class="offer-list">
+              <li>Mindset and emotional resilience programs</li>
+              <li>Focus, productivity, and anti-overwhelm tracks</li>
+              <li>Sleep, recovery, and stress relief routines</li>
+              <li>Body confidence and movement support classes</li>
+            </ul>
+          </article>
+          <article class="offer-panel">
+            <h3>Why people convert after the quiz</h3>
+            <ul class="offer-list">
+              <li>The plan already feels personalized</li>
+              <li>The routines are short enough to stick</li>
+              <li>The design feels calm, premium, and clear</li>
+              <li>The app gives structure without pressure</li>
+            </ul>
+          </article>
+        </div>
+
+        <div class="testimonial-row">
+          <article class="testimonial-card">
+            <p>"It felt like a calmer, more premium version of the usual fitness quiz funnels. I actually wanted to keep going."</p>
+            <span>Emma, 32</span>
+          </article>
+          <article class="testimonial-card">
+            <p>"The mobile flow was smooth, fast, and the plan felt relevant in under five minutes."</p>
+            <span>Daniel, 41</span>
+          </article>
+        </div>
+
+        <div class="step-actions offer-actions">
+          <button type="button" class="btn btn-primary offer-cta">Continue to checkout</button>
+          <button type="button" class="btn offer-secondary" data-action="restart">Retake the quiz</button>
         </div>
       </div>
     </article>
@@ -998,7 +1206,7 @@ function startLoadingSequence(durationMs) {
 function toggleOption(step, optionIndex) {
   if (step.type === "single") {
     setAnswer(step.id, optionIndex);
-    renderStep();
+    syncOptionSelection(step);
     return;
   }
 
@@ -1013,8 +1221,22 @@ function toggleOption(step, optionIndex) {
     }
 
     setAnswer(step.id, Array.from(nextSelection).sort((a, b) => a - b));
-    renderStep();
+    syncOptionSelection(step);
   }
+}
+
+function syncOptionSelection(step) {
+  const selected = getAnswer(step.id);
+  const selectedSet = new Set(
+    Array.isArray(selected) ? selected : [selected].filter((item) => item !== undefined)
+  );
+
+  appEl.querySelectorAll('[data-action="select-option"]').forEach((node) => {
+    const index = Number(node.dataset.index);
+    node.classList.toggle("selected", selectedSet.has(index));
+  });
+
+  showError("");
 }
 
 appEl.addEventListener("click", (event) => {

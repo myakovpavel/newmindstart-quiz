@@ -358,11 +358,55 @@ body {
   gap: 10px;
 }
 
+.question-visual {
+  position: relative;
+  height: 136px;
+  border-radius: 24px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.78);
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  box-shadow: var(--shadow-soft);
+}
+
+.question-visual-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.question-visual::after {
+  content: "";
+  position: absolute;
+  inset: auto 0 0 0;
+  height: 52%;
+  background: linear-gradient(180deg, transparent 0%, rgba(18, 18, 18, 0.32) 100%);
+}
+
+.question-visual-chip {
+  position: absolute;
+  left: 14px;
+  bottom: 14px;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  min-height: 30px;
+  padding: 0 12px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.84);
+  color: rgba(21, 21, 21, 0.74);
+  font-size: 0.77rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  backdrop-filter: blur(10px);
+}
+
 .option {
   position: relative;
   width: 100%;
   min-height: 62px;
-  padding: 16px 18px;
+  padding: 16px 56px 16px 18px;
   border: 1px solid var(--line);
   border-radius: 20px;
   background: rgba(255, 255, 255, 0.84);
@@ -381,6 +425,21 @@ body {
     box-shadow var(--ease);
 }
 
+.option::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: 18px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--accent-strong);
+  transform: translateY(-50%);
+  box-shadow: 0 0 0 6px rgba(242, 139, 68, 0.12);
+  opacity: 0;
+  transition: opacity var(--ease);
+}
+
 .option:hover {
   transform: translateY(-1px);
   border-color: rgba(242, 139, 68, 0.28);
@@ -394,16 +453,7 @@ body {
 }
 
 .option.selected::after {
-  content: "";
-  position: absolute;
-  top: 50%;
-  right: 18px;
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  background: var(--accent-strong);
-  transform: translateY(-50%);
-  box-shadow: 0 0 0 6px rgba(242, 139, 68, 0.12);
+  opacity: 1;
 }
 
 .step-actions {
@@ -570,6 +620,101 @@ body {
   margin-top: 16px;
 }
 
+.offer-hero,
+.offer-grid,
+.testimonial-row {
+  display: grid;
+  gap: 16px;
+}
+
+.offer-copy {
+  display: grid;
+  gap: 14px;
+}
+
+.offer-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.offer-card,
+.offer-panel,
+.testimonial-card {
+  padding: 18px;
+  border-radius: 22px;
+  border: 1px solid var(--line);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.95), rgba(255, 244, 235, 0.9));
+  box-shadow: 0 16px 34px rgba(17, 17, 17, 0.04);
+}
+
+.offer-card {
+  display: grid;
+  gap: 14px;
+}
+
+.offer-label {
+  display: inline-flex;
+  align-items: center;
+  min-height: 30px;
+  padding: 0 11px;
+  width: fit-content;
+  border-radius: 999px;
+  background: rgba(242, 139, 68, 0.12);
+  color: var(--accent-strong);
+  font-size: 0.76rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.offer-price strong {
+  display: block;
+  font-family: "Sora", sans-serif;
+  font-size: 2.8rem;
+  line-height: 1;
+  letter-spacing: -0.07em;
+}
+
+.offer-price span,
+.offer-price-note,
+.offer-security,
+.testimonial-card span {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+.offer-list {
+  margin: 0;
+  padding-left: 18px;
+  color: var(--text-muted);
+  line-height: 1.7;
+}
+
+.offer-list li + li {
+  margin-top: 8px;
+}
+
+.testimonial-card p {
+  margin: 0 0 10px;
+  color: var(--text);
+  font-size: 1rem;
+  line-height: 1.65;
+}
+
+.offer-actions {
+  width: 100%;
+}
+
+.offer-secondary {
+  background: rgba(255, 255, 255, 0.86);
+  color: var(--text);
+  border: 1px solid var(--line);
+  box-shadow: 0 8px 18px rgba(17, 17, 17, 0.04);
+}
+
 @media (min-width: 720px) {
   .quiz-shell {
     padding: 22px 18px 40px;
@@ -617,6 +762,16 @@ body {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
+   .offer-hero {
+    grid-template-columns: minmax(0, 1.2fr) minmax(280px, 0.8fr);
+    align-items: start;
+  }
+
+  .offer-grid,
+  .testimonial-row {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
   .step-actions {
     width: fit-content;
     min-width: 240px;
@@ -643,5 +798,9 @@ body {
 
   .hero-device {
     width: 220px;
+  }
+
+  .question-visual {
+    height: 164px;
   }
 }
