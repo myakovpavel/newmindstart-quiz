@@ -8,415 +8,419 @@ const steps = [
     id: "welcome",
     type: "hero",
     trackProgress: false,
-    title: "СДЕЛАЙ ЖИЗНЬ\nЛЕГЧЕ И ЯСНЕЕ",
+    title: "Feel lighter.\nThink clearer.\nMove forward.",
     description:
-      "Этот квиз от NewMindStart собирает твой персональный профиль: фокус, энергия, эмоциональный баланс и ежедневные привычки. В конце ты получишь стартовый план на 4 недели.",
-    pills: ["4-5 минут", "На базе поведенческой психологии", "Персональные рекомендации"],
-    cta: "Пройти персональный квиз",
+      "This NewMindStart quiz maps your energy, focus, emotional balance, and everyday habits to shape a more personal starting plan.",
+    pills: [
+      "4 minute flow",
+      "Behavior science based",
+      "Personal growth blueprint",
+    ],
+    cta: "Start my quiz",
   },
   {
     id: "age",
     type: "single",
-    question: "Сколько тебе лет?",
-    description: "Возраст нужен только для корректной персонализации программы.",
-    options: [
-      { label: "18-24", value: "18-24" },
-      { label: "25-34", value: "25-34" },
-      { label: "35-44", value: "35-44" },
-      { label: "45-54", value: "45-54" },
-      { label: "55-64", value: "55-64" },
-      { label: "65+", value: "65+" },
-    ],
-    nextLabel: "Дальше",
+    eyebrow: "Personal fit",
+    question: "How old are you?",
+    description: "We only use age to tailor the tone and pace of your plan.",
+    options: ["18-24", "25-34", "35-44", "45-54", "55-64", "65+"].map(
+      (label) => ({ label, value: label })
+    ),
+    nextLabel: "Continue",
   },
   {
     id: "teaser_people",
     type: "info",
-    title: "500 000+ участников уже с NewMindStart",
+    eyebrow: "Why this works",
+    title: "More than 500,000 people have already stepped into NewMindStart.",
     description:
-      "Люди с разным темпом жизни используют платформу, чтобы снизить тревожность, улучшить концентрацию и вернуть устойчивую энергию в день.",
-    box: "Мы не даем «универсальные советы». Твой план строится по ответам в этом квизе.",
-    cta: "Продолжить",
+      "The goal is not to label you. The goal is to spot the patterns that are quietly shaping your days.",
+    note: "Your answers turn into a practical starting plan, not generic wellness copy.",
+    cta: "Keep going",
   },
   {
     id: "energy_after_rest",
     type: "single",
-    question: "Как часто к вечеру чувствуешь себя выжатым(ой), даже если вроде отдыхал(а)?",
+    question: "How often do you feel drained by the end of the day, even after some rest?",
     options: [
-      { label: "Почти каждый день", score: 1, tags: ["energy", "stress"] },
-      { label: "Пару раз в неделю", score: 2, tags: ["energy"] },
-      { label: "Редко", score: 3, tags: ["balance"] },
+      { label: "Almost every day", score: 1, tags: ["energy", "stress"] },
+      { label: "A few times a week", score: 2, tags: ["energy"] },
+      { label: "Rarely", score: 4, tags: ["balance"] },
     ],
   },
   {
     id: "deadline_delay",
     type: "single",
-    question: "Бывает, что ты откладываешь важное до последнего момента?",
+    question: "Do you tend to leave important things until the last minute?",
     options: [
-      { label: "Да, часто", score: 1, tags: ["focus", "habits"] },
-      { label: "Иногда", score: 2, tags: ["focus"] },
-      { label: "Почти нет", score: 3, tags: ["discipline"] },
+      { label: "Yes, often", score: 1, tags: ["focus", "habits"] },
+      { label: "Sometimes", score: 2, tags: ["focus"] },
+      { label: "Not really", score: 4, tags: ["discipline"] },
     ],
   },
   {
     id: "distracted_level",
     type: "single",
-    question: "Что лучше всего описывает твою концентрацию в течение дня?",
+    question: "Which description sounds most like your attention during the day?",
     options: [
-      { label: "Легко отвлекаюсь даже на мелочи", score: 1, tags: ["focus"] },
-      { label: "Иногда теряю нить", score: 2, tags: ["focus"] },
-      { label: "Обычно держу фокус", score: 3, tags: ["discipline"] },
-      { label: "Почти всегда в потоке", score: 4, tags: ["discipline", "balance"] },
+      { label: "I get pulled away by little things", score: 1, tags: ["focus"] },
+      { label: "I lose momentum now and then", score: 2, tags: ["focus"] },
+      { label: "I usually stay on track", score: 3, tags: ["discipline"] },
+      { label: "I am mostly in deep focus", score: 4, tags: ["discipline", "balance"] },
     ],
   },
   {
     id: "overwhelm_feeling",
     type: "single",
-    question: "Как часто тревога или перегруз мешают спокойно проживать день?",
+    question: "How often does stress or overwhelm affect your day?",
     options: [
-      { label: "Часто", score: 1, tags: ["stress"] },
-      { label: "Иногда", score: 2, tags: ["stress"] },
-      { label: "Редко", score: 3, tags: ["balance"] },
+      { label: "Often", score: 1, tags: ["stress"] },
+      { label: "Sometimes", score: 2, tags: ["stress"] },
+      { label: "Rarely", score: 4, tags: ["balance"] },
     ],
   },
   {
     id: "mood_swings",
     type: "single",
-    question: "Бывают ли резкие эмоциональные качели?",
+    question: "Do emotional ups and downs feel sharp lately?",
     options: [
-      { label: "Да, заметно", score: 1, tags: ["balance"] },
-      { label: "Иногда", score: 2, tags: ["balance"] },
-      { label: "Почти не бывает", score: 3, tags: ["resilience"] },
+      { label: "Yes, definitely", score: 1, tags: ["balance"] },
+      { label: "Sometimes", score: 2, tags: ["balance"] },
+      { label: "Not much", score: 4, tags: ["resilience"] },
     ],
   },
   {
     id: "inner_harmony",
     type: "single",
-    question: "В последние месяцы ты ощущаешь внутреннюю опору и контакт с близкими?",
+    question: "Have you felt connected to yourself and to people around you lately?",
     options: [
-      { label: "Да, в основном", score: 4, tags: ["connection"] },
-      { label: "Скорее частично", score: 2, tags: ["connection"] },
-      { label: "Скорее нет", score: 1, tags: ["connection", "stress"] },
+      { label: "Yes, mostly", score: 4, tags: ["connection"] },
+      { label: "Only partly", score: 2, tags: ["connection"] },
+      { label: "Not really", score: 1, tags: ["connection", "stress"] },
     ],
   },
   {
     id: "statement_emotions",
     type: "single",
-    question: "Мне сложно открыто говорить о своих чувствах.",
-    description: "Выбери, насколько это похоже на тебя.",
+    question: "It is hard for me to speak openly about how I feel.",
+    description: "Pick the answer that feels closest.",
     options: [
-      { label: "Полностью не согласен(на)", score: 5, tags: ["confidence"] },
-      { label: "Скорее не согласен(на)", score: 4, tags: ["confidence"] },
-      { label: "Не уверен(а)", score: 3, tags: ["confidence"] },
-      { label: "Скорее согласен(на)", score: 2, tags: ["confidence"] },
-      { label: "Полностью согласен(на)", score: 1, tags: ["confidence", "connection"] },
+      { label: "Strongly disagree", score: 5, tags: ["confidence"] },
+      { label: "Somewhat disagree", score: 4, tags: ["confidence"] },
+      { label: "Not sure", score: 3, tags: ["confidence"] },
+      { label: "Somewhat agree", score: 2, tags: ["confidence"] },
+      { label: "Strongly agree", score: 1, tags: ["confidence", "connection"] },
     ],
   },
   {
     id: "statement_tasks",
     type: "single",
-    question: "Объем задач часто кажется неподъемным.",
-    description: "Выбери, насколько это похоже на тебя.",
+    question: "My to do list often feels bigger than my actual capacity.",
+    description: "Pick the answer that feels closest.",
     options: [
-      { label: "Полностью не согласен(на)", score: 5, tags: ["focus"] },
-      { label: "Скорее не согласен(на)", score: 4, tags: ["focus"] },
-      { label: "Не уверен(а)", score: 3, tags: ["focus"] },
-      { label: "Скорее согласен(на)", score: 2, tags: ["stress"] },
-      { label: "Полностью согласен(на)", score: 1, tags: ["stress", "habits"] },
+      { label: "Strongly disagree", score: 5, tags: ["focus"] },
+      { label: "Somewhat disagree", score: 4, tags: ["focus"] },
+      { label: "Not sure", score: 3, tags: ["focus"] },
+      { label: "Somewhat agree", score: 2, tags: ["stress"] },
+      { label: "Strongly agree", score: 1, tags: ["stress", "habits"] },
     ],
   },
   {
     id: "statement_decisions",
     type: "single",
-    question: "Мне тяжело принимать решения без сомнений.",
-    description: "Выбери, насколько это похоже на тебя.",
+    question: "I struggle to make decisions without second-guessing myself.",
+    description: "Pick the answer that feels closest.",
     options: [
-      { label: "Полностью не согласен(на)", score: 5, tags: ["confidence"] },
-      { label: "Скорее не согласен(на)", score: 4, tags: ["confidence"] },
-      { label: "Не уверен(а)", score: 3, tags: ["confidence"] },
-      { label: "Скорее согласен(на)", score: 2, tags: ["confidence"] },
-      { label: "Полностью согласен(на)", score: 1, tags: ["confidence", "stress"] },
+      { label: "Strongly disagree", score: 5, tags: ["confidence"] },
+      { label: "Somewhat disagree", score: 4, tags: ["confidence"] },
+      { label: "Not sure", score: 3, tags: ["confidence"] },
+      { label: "Somewhat agree", score: 2, tags: ["confidence"] },
+      { label: "Strongly agree", score: 1, tags: ["confidence", "stress"] },
     ],
   },
   {
     id: "statement_fear_fail",
     type: "single",
-    question: "Страх ошибки часто тормозит мои цели.",
-    description: "Выбери, насколько это похоже на тебя.",
+    question: "Fear of getting it wrong slows down my goals.",
+    description: "Pick the answer that feels closest.",
     options: [
-      { label: "Полностью не согласен(на)", score: 5, tags: ["discipline"] },
-      { label: "Скорее не согласен(на)", score: 4, tags: ["discipline"] },
-      { label: "Не уверен(а)", score: 3, tags: ["discipline"] },
-      { label: "Скорее согласен(на)", score: 2, tags: ["confidence"] },
-      { label: "Полностью согласен(на)", score: 1, tags: ["confidence", "focus"] },
+      { label: "Strongly disagree", score: 5, tags: ["discipline"] },
+      { label: "Somewhat disagree", score: 4, tags: ["discipline"] },
+      { label: "Not sure", score: 3, tags: ["discipline"] },
+      { label: "Somewhat agree", score: 2, tags: ["confidence"] },
+      { label: "Strongly agree", score: 1, tags: ["confidence", "focus"] },
     ],
   },
   {
     id: "compliments",
     type: "single",
-    question: "Сложно принять комплимент, потому что внутри есть недоверие к себе?",
+    question: "Do compliments ever feel hard to believe?",
     options: [
-      { label: "Да, почти всегда", score: 1, tags: ["confidence"] },
-      { label: "Иногда зависит от ситуации", score: 2, tags: ["confidence"] },
-      { label: "Практически нет", score: 4, tags: ["confidence"] },
-      { label: "Трудно оценить", score: 2, tags: ["confidence"] },
+      { label: "Yes, very often", score: 1, tags: ["confidence"] },
+      { label: "Sometimes", score: 2, tags: ["confidence"] },
+      { label: "Rarely", score: 4, tags: ["confidence"] },
+      { label: "I am not sure", score: 2, tags: ["confidence"] },
     ],
   },
   {
     id: "social_insecurity",
     type: "single",
-    question: "В общении ты часто чувствуешь неуверенность?",
+    question: "Do you feel unsure of yourself while talking to people?",
     options: [
-      { label: "Да", score: 1, tags: ["confidence", "connection"] },
-      { label: "Нет", score: 4, tags: ["connection"] },
-      { label: "Иногда", score: 2, tags: ["confidence"] },
+      { label: "Yes", score: 1, tags: ["confidence", "connection"] },
+      { label: "Sometimes", score: 2, tags: ["confidence"] },
+      { label: "No", score: 4, tags: ["connection"] },
     ],
   },
   {
     id: "overthinking_partner",
     type: "single",
-    question: "В отношениях склонен(на) накручивать себя из-за поведения партнера?",
+    question: "Do you overthink a partner's tone, mood, or behavior?",
     options: [
-      { label: "Да, часто", score: 1, tags: ["stress", "connection"] },
-      { label: "Иногда", score: 2, tags: ["connection"] },
-      { label: "Редко", score: 4, tags: ["resilience"] },
+      { label: "Yes, often", score: 1, tags: ["stress", "connection"] },
+      { label: "Sometimes", score: 2, tags: ["connection"] },
+      { label: "Rarely", score: 4, tags: ["resilience"] },
     ],
   },
   {
     id: "others_first",
     type: "single",
-    question: "Часто ставишь нужды других выше своих, даже в ущерб себе?",
+    question: "Do you put other people's needs ahead of your own too often?",
     options: [
-      { label: "Да", score: 1, tags: ["boundaries"] },
-      { label: "Иногда", score: 2, tags: ["boundaries"] },
-      { label: "Нет", score: 4, tags: ["boundaries", "resilience"] },
+      { label: "Yes", score: 1, tags: ["boundaries"] },
+      { label: "Sometimes", score: 2, tags: ["boundaries"] },
+      { label: "No", score: 4, tags: ["boundaries", "resilience"] },
     ],
   },
   {
     id: "last_motivation",
     type: "single",
-    question: "Когда в последний раз ты чувствовал(а) устойчивую мотивацию?",
+    question: "When did you last feel deeply motivated for more than a day or two?",
     options: [
-      { label: "В последние дни", score: 4, tags: ["energy"] },
-      { label: "1-2 недели назад", score: 3, tags: ["energy"] },
-      { label: "Пару месяцев назад", score: 2, tags: ["energy"] },
-      { label: "Давно не помню", score: 1, tags: ["energy", "stress"] },
+      { label: "Within the last few days", score: 4, tags: ["energy"] },
+      { label: "A week or two ago", score: 3, tags: ["energy"] },
+      { label: "A few months ago", score: 2, tags: ["energy"] },
+      { label: "I honestly do not remember", score: 1, tags: ["energy", "stress"] },
     ],
   },
   {
     id: "improve_areas",
     type: "multi",
-    question: "Какие области тебе хочется улучшить в первую очередь?",
-    description: "Можно выбрать несколько пунктов.",
+    question: "Which areas feel most important to improve right now?",
+    description: "Choose as many as you want.",
     options: [
-      { label: "Управление тревогой", score: 2, tags: ["stress"] },
-      { label: "Стабильная энергия", score: 2, tags: ["energy"] },
-      { label: "Фокус и продуктивность", score: 2, tags: ["focus"] },
-      { label: "Уверенность в себе", score: 2, tags: ["confidence"] },
-      { label: "Коммуникация и отношения", score: 2, tags: ["connection"] },
-      { label: "Личный баланс и границы", score: 2, tags: ["boundaries"] },
+      { label: "Stress regulation", score: 2, tags: ["stress"] },
+      { label: "Steadier energy", score: 2, tags: ["energy"] },
+      { label: "Focus and productivity", score: 2, tags: ["focus"] },
+      { label: "Self-confidence", score: 2, tags: ["confidence"] },
+      { label: "Relationships and communication", score: 2, tags: ["connection"] },
+      { label: "Balance and boundaries", score: 2, tags: ["boundaries"] },
     ],
   },
   {
     id: "morning_first",
     type: "single",
-    question: "Что обычно происходит в первые 30 минут после пробуждения?",
+    question: "What usually happens during the first half hour after you wake up?",
     options: [
-      { label: "Сразу хватаюсь за телефон", score: 1, tags: ["habits", "focus"] },
-      { label: "Собираюсь в спешке", score: 2, tags: ["habits"] },
-      { label: "Есть короткий ритуал и план", score: 4, tags: ["discipline"] },
-      { label: "Каждый день по-разному", score: 2, tags: ["habits"] },
+      { label: "I reach for my phone right away", score: 1, tags: ["habits", "focus"] },
+      { label: "I rush into the day", score: 2, tags: ["habits"] },
+      { label: "I have a short routine and some structure", score: 4, tags: ["discipline"] },
+      { label: "It changes every day", score: 2, tags: ["habits"] },
     ],
   },
   {
     id: "physical_activity",
     type: "single",
-    question: "Сколько движения у тебя в неделю?",
+    question: "How much movement do you usually get in a week?",
     options: [
-      { label: "Почти нет", score: 1, tags: ["energy"] },
-      { label: "1-2 коротких занятия", score: 2, tags: ["energy"] },
-      { label: "3-4 тренировки или активные прогулки", score: 3, tags: ["energy"] },
-      { label: "5+ активных дней", score: 4, tags: ["energy", "discipline"] },
+      { label: "Very little", score: 1, tags: ["energy"] },
+      { label: "One or two short sessions", score: 2, tags: ["energy"] },
+      { label: "Three or four active days", score: 3, tags: ["energy"] },
+      { label: "Five or more active days", score: 4, tags: ["energy", "discipline"] },
     ],
   },
   {
     id: "quit_habits",
     type: "multi",
-    question: "Какие привычки ты хотел(а) бы сократить?",
-    description: "Можно выбрать несколько.",
+    question: "Which habits would you most like to reduce?",
+    description: "Choose as many as you want.",
     options: [
-      { label: "Бесконечный скролл", score: 1, tags: ["habits", "focus"] },
-      { label: "Прокрастинация", score: 1, tags: ["habits", "focus"] },
-      { label: "Переработки без пауз", score: 1, tags: ["energy"] },
-      { label: "Эмоциональные заедания", score: 1, tags: ["stress"] },
-      { label: "Ночной режим сна", score: 1, tags: ["sleep"] },
-      { label: "Самокритика", score: 1, tags: ["confidence"] },
-      { label: "Пока ничего", score: 4, tags: ["resilience"] },
+      { label: "Endless scrolling", score: 1, tags: ["habits", "focus"] },
+      { label: "Procrastination", score: 1, tags: ["habits", "focus"] },
+      { label: "Working without breaks", score: 1, tags: ["energy"] },
+      { label: "Stress eating", score: 1, tags: ["stress"] },
+      { label: "Late night sleep rhythm", score: 1, tags: ["sleep"] },
+      { label: "Harsh self-talk", score: 1, tags: ["confidence"] },
+      { label: "Nothing stands out", score: 4, tags: ["resilience"] },
     ],
   },
   {
     id: "sleep_improve",
     type: "multi",
-    question: "Что тебе хотелось бы улучшить в сне?",
-    description: "Выбери все актуальные пункты.",
+    question: "What would you most like to improve about your sleep?",
+    description: "Choose every answer that fits.",
     options: [
-      { label: "Сложно заснуть", score: 1, tags: ["sleep", "stress"] },
-      { label: "Часто просыпаюсь ночью", score: 1, tags: ["sleep"] },
-      { label: "Просыпаюсь без энергии", score: 1, tags: ["sleep", "energy"] },
-      { label: "Сбитый режим", score: 1, tags: ["sleep", "habits"] },
-      { label: "Сон в порядке", score: 4, tags: ["sleep"] },
+      { label: "Falling asleep", score: 1, tags: ["sleep", "stress"] },
+      { label: "Waking up in the middle of the night", score: 1, tags: ["sleep"] },
+      { label: "Waking up tired", score: 1, tags: ["sleep", "energy"] },
+      { label: "A more stable schedule", score: 1, tags: ["sleep", "habits"] },
+      { label: "My sleep is already solid", score: 4, tags: ["sleep"] },
     ],
   },
   {
     id: "recent_triggers",
     type: "multi",
-    question: "Что в последнее время стало источником повышенного напряжения?",
-    description: "Можно выбрать несколько.",
+    question: "What has been adding the most pressure lately?",
+    description: "Choose as many as you want.",
     options: [
-      { label: "Рабочая нагрузка", score: 1, tags: ["stress"] },
-      { label: "Финансовые вопросы", score: 1, tags: ["stress"] },
-      { label: "Отношения", score: 1, tags: ["connection"] },
-      { label: "Семья", score: 1, tags: ["connection"] },
-      { label: "Состояние здоровья", score: 1, tags: ["energy"] },
-      { label: "Сильных триггеров нет", score: 4, tags: ["resilience"] },
+      { label: "Workload", score: 1, tags: ["stress"] },
+      { label: "Money pressure", score: 1, tags: ["stress"] },
+      { label: "Relationships", score: 1, tags: ["connection"] },
+      { label: "Family dynamics", score: 1, tags: ["connection"] },
+      { label: "Health concerns", score: 1, tags: ["energy"] },
+      { label: "Nothing major at the moment", score: 4, tags: ["resilience"] },
     ],
   },
   {
     id: "happier_life",
     type: "multi",
-    question: "Чтобы жить спокойнее и счастливее, на чем важнее всего сфокусироваться?",
-    description: "Выбери несколько приоритетов.",
+    question: "To feel more grounded and happy, what needs the biggest upgrade?",
+    description: "Choose your top priorities.",
     options: [
-      { label: "Эмоциональная устойчивость", score: 2, tags: ["balance"] },
-      { label: "Ясный ум и концентрация", score: 2, tags: ["focus"] },
-      { label: "Регулярный отдых без вины", score: 2, tags: ["boundaries"] },
-      { label: "Здоровые отношения", score: 2, tags: ["connection"] },
-      { label: "Уверенность в себе", score: 2, tags: ["confidence"] },
-      { label: "Больше жизненной энергии", score: 2, tags: ["energy"] },
+      { label: "Emotional steadiness", score: 2, tags: ["balance"] },
+      { label: "Mental clarity", score: 2, tags: ["focus"] },
+      { label: "Rest without guilt", score: 2, tags: ["boundaries"] },
+      { label: "Healthier relationships", score: 2, tags: ["connection"] },
+      { label: "Self-trust", score: 2, tags: ["confidence"] },
+      { label: "More life energy", score: 2, tags: ["energy"] },
     ],
   },
   {
     id: "plan_targets",
     type: "multi",
-    question: "Какие направления включить в персональный план в первую очередь?",
-    description: "Можно выбрать несколько.",
+    question: "What would you like your plan to help you build first?",
+    description: "Choose as many as you want.",
     options: [
-      { label: "Дыхательные и антистресс-практики", score: 2, tags: ["stress"] },
-      { label: "Утренняя система запуска дня", score: 2, tags: ["habits"] },
-      { label: "Фокус-блоки без отвлечений", score: 2, tags: ["focus"] },
-      { label: "Прокачка самооценки", score: 2, tags: ["confidence"] },
-      { label: "Границы и мягкая коммуникация", score: 2, tags: ["boundaries"] },
-      { label: "Режим восстановления и сна", score: 2, tags: ["sleep"] },
+      { label: "Short reset and stress tools", score: 2, tags: ["stress"] },
+      { label: "A stronger morning rhythm", score: 2, tags: ["habits"] },
+      { label: "Focus blocks with less noise", score: 2, tags: ["focus"] },
+      { label: "Healthier self-worth", score: 2, tags: ["confidence"] },
+      { label: "Clearer boundaries and communication", score: 2, tags: ["boundaries"] },
+      { label: "Recovery and sleep structure", score: 2, tags: ["sleep"] },
     ],
   },
   {
     id: "evidence",
     type: "info",
-    title: "Метод NewMindStart опирается на доказательные подходы",
+    eyebrow: "Built with intention",
+    title: "NewMindStart is shaped by evidence-based behavioral methods.",
     description:
-      "Мы используем техники из CBT, поведенческой психологии, практик саморегуляции и микро-обучения. Программа строится так, чтобы маленькие действия закреплялись в реальной жизни.",
-    box: "Ты получишь не «мотивационный шум», а пошаговую структуру, которую можно выполнить даже в загруженный день.",
-    cta: "Отлично, дальше",
+      "We draw from CBT, behavior design, emotional regulation tools, and micro-learning so the plan feels realistic on an actual busy day.",
+    note: "The goal is consistency over intensity. Small repeatable actions usually win.",
+    cta: "Continue",
   },
   {
     id: "behavior_knowledge",
     type: "single",
-    question: "Насколько ты знаком(а) с поведенческими техниками и работой с привычками?",
+    question: "How familiar are you with behavior change or habit design tools?",
     options: [
-      { label: "Хорошо знаком(а), уже практиковал(а)", score: 4, tags: ["discipline"] },
-      { label: "Что-то пробовал(а), но без системы", score: 2, tags: ["habits"] },
-      { label: "Почти не знаком(а)", score: 1, tags: ["habits"] },
+      { label: "Very familiar, I have used them before", score: 4, tags: ["discipline"] },
+      { label: "A little, but never with a system", score: 2, tags: ["habits"] },
+      { label: "Hardly at all", score: 1, tags: ["habits"] },
     ],
   },
   {
     id: "heard_expert",
     type: "single",
-    question: "Ты пришел(ла) по рекомендации специалиста?",
+    question: "Did an expert or coach recommend a program like this to you?",
     options: [
-      { label: "Да", score: 3, tags: ["motivation"] },
-      { label: "Нет", score: 2, tags: ["motivation"] },
+      { label: "Yes", score: 3, tags: ["motivation"] },
+      { label: "No", score: 2, tags: ["motivation"] },
     ],
   },
   {
     id: "teaser_community",
     type: "info",
-    title: "Ты не один(одна): у нас сильное сообщество практики",
+    eyebrow: "Momentum matters",
+    title: "People do better when growth feels supported, not lonely.",
     description:
-      "Сессии в группе, короткие задания и поддержка кураторов помогают удерживать ритм и видеть результат уже в первые недели.",
-    box: "В среднем участники отмечают рост энергии и фокуса уже в первые 10-14 дней регулярной работы.",
-    cta: "Продолжить",
+      "Structured sessions, gentle accountability, and compact routines make it easier to stay with the process long enough to see change.",
+    note: "That is why your plan is designed to feel calm, elegant, and realistic from day one.",
+    cta: "Next",
   },
   {
     id: "daily_goal",
     type: "single",
-    question: "Сколько времени в день ты готов(а) выделять на свою программу?",
+    question: "How much time could you honestly give this plan each day?",
     options: [
-      { label: "5 минут", score: 1, tags: ["habits"] },
-      { label: "10 минут", score: 2, tags: ["habits"] },
-      { label: "15 минут", score: 3, tags: ["discipline"] },
-      { label: "20+ минут", score: 4, tags: ["discipline"] },
+      { label: "5 minutes", score: 1, tags: ["habits"] },
+      { label: "10 minutes", score: 2, tags: ["habits"] },
+      { label: "15 minutes", score: 3, tags: ["discipline"] },
+      { label: "20+ minutes", score: 4, tags: ["discipline"] },
     ],
   },
   {
     id: "email",
     type: "input",
     field: "email",
-    question: "Куда отправить твой персональный профиль NewMindStart?",
-    description: "Мы пришлем краткий отчет и стартовый план в формате, удобном для ежедневного использования.",
+    eyebrow: "Profile delivery",
+    question: "Where should we send your personal NewMindStart profile?",
+    description:
+      "We will attach your starter summary and your first plan outline to this email.",
     placeholder: "you@example.com",
     inputType: "email",
-    nextLabel: "Получить профиль",
+    nextLabel: "Get my profile",
   },
   {
     id: "newsletter",
     type: "single",
-    question: "Хочешь получать короткие письма с практиками, которые реально работают?",
+    question: "Would you like practical NewMindStart emails with short weekly tools?",
     options: [
-      { label: "Да, 1-2 письма в неделю", value: "yes" },
-      { label: "Нет, только мой отчет", value: "no" },
+      { label: "Yes, a light weekly cadence", value: "yes" },
+      { label: "No, just my report", value: "no" },
     ],
   },
   {
     id: "name",
     type: "input",
     field: "name",
-    question: "Как к тебе обращаться в плане?",
-    description: "Имя нужно, чтобы персональные рекомендации выглядели как твоя рабочая карта, а не шаблон.",
-    placeholder: "Например, Павел",
+    eyebrow: "Personal touch",
+    question: "What should we call you in the plan?",
+    description:
+      "Your name helps the summary feel more like a personal map and less like a template.",
+    placeholder: "For example, Alex",
     inputType: "text",
-    nextLabel: "Сформировать отчет",
+    nextLabel: "Build my summary",
   },
   {
     id: "summary",
     type: "summary",
-    title: "Карта твоего состояния готова",
   },
   {
     id: "plan_preview",
     type: "plan",
-    title: "Твоя программа NewMindStart на 4 недели",
   },
   {
     id: "calculating",
     type: "loading",
     trackProgress: false,
-    title: "Собираем персональный маршрут",
+    title: "Designing your starting path",
     description:
-      "Сопоставляем твои ответы с поведенческими паттернами, чтобы план был посильным и реалистичным.",
-    duration: 3800,
+      "We are translating your answers into a calm, realistic four-week plan.",
+    duration: 3600,
   },
   {
     id: "final",
     type: "final",
-    title: "Твой стартовый план готов",
   },
 ];
 
 const state = {
   currentStepIndex: 0,
   answers: {},
-  loadingTimer: null,
   loadingInterval: null,
+  loadingTimer: null,
 };
 
 const trackedStepIndices = steps
@@ -426,52 +430,52 @@ const trackedStepIndices = steps
 
 const insightMap = {
   focus: {
-    title: "Фокус и ментальная ясность",
-    text: "Тебе полезен режим коротких концентрированных блоков и защита внимания от цифрового шума.",
+    title: "Focus and attention",
+    text: "Your plan should reduce noise, simplify decisions, and protect deep work windows.",
   },
   stress: {
-    title: "Снижение стресса",
-    text: "Ключ к прогрессу: стабильные антистресс-ритуалы 2-3 раза в день, а не редкие длинные практики.",
+    title: "Stress regulation",
+    text: "The strongest lever is a steady reset rhythm through the day, not occasional heavy effort.",
   },
   energy: {
-    title: "Восстановление энергии",
-    text: "Главный рычаг роста: ритм сна, паузы восстановления и умеренная регулярная активность.",
+    title: "Energy recovery",
+    text: "Better recovery, sleep timing, and lighter routines can restore more consistent energy.",
   },
   confidence: {
-    title: "Уверенность и самооценка",
-    text: "Фокус программы: снизить внутреннюю критику и заменить ее системой поддерживающих действий.",
+    title: "Self-trust",
+    text: "A calmer internal voice and repeated small wins will likely move the needle fastest.",
   },
   boundaries: {
-    title: "Личные границы",
-    text: "Тебе даст рост навык экологичного «нет» и структурированное распределение личного ресурса.",
+    title: "Personal boundaries",
+    text: "Protecting your own bandwidth more clearly may bring immediate relief and steadiness.",
   },
   connection: {
-    title: "Отношения и контакт",
-    text: "Для устойчивости важно укрепить коммуникацию, чтобы не накапливать напряжение в диалогах.",
+    title: "Relationships",
+    text: "You may benefit from clearer communication and less emotional guessing in close dynamics.",
   },
   sleep: {
-    title: "Качество сна",
-    text: "Нужна настройка вечернего ритуала: меньше возбуждающих стимулов, больше предсказуемости.",
+    title: "Sleep quality",
+    text: "A more intentional wind-down rhythm could upgrade both recovery and next-day capacity.",
   },
   habits: {
-    title: "Устойчивые привычки",
-    text: "Будем строить микро-шаги, которые легко повторять ежедневно и превращать в новую норму.",
+    title: "Habit structure",
+    text: "You are likely to respond well to lighter routines with almost no friction to begin.",
   },
   discipline: {
-    title: "Режим и последовательность",
-    text: "У тебя хороший потенциал роста через четкий ритм: маленькие действия, но ежедневно.",
+    title: "Consistency",
+    text: "You already have some ability to hold structure. The plan should build on that, not restart from zero.",
   },
   resilience: {
-    title: "Эмоциональная устойчивость",
-    text: "Текущий базис уже неплохой. Задача плана: закрепить его и сделать более предсказуемым.",
+    title: "Resilience",
+    text: "You have useful stability in the background. The next step is making it more reliable under pressure.",
   },
   balance: {
-    title: "Внутренний баланс",
-    text: "Для стабильности важно поддерживать эмоциональное равновесие через регулярные чек-ины.",
+    title: "Emotional balance",
+    text: "Regular self-checks and softer transitions through the day may help you feel more even.",
   },
   motivation: {
-    title: "Внутренняя мотивация",
-    text: "Тебе подойдет формат с быстрыми видимыми победами, чтобы поддерживать темп без перегруза.",
+    title: "Momentum",
+    text: "Quick visible progress matters. Your program should create elegant wins early.",
   },
 };
 
@@ -487,8 +491,8 @@ function setAnswer(stepId, value) {
   state.answers[stepId] = value;
 }
 
-function escapeHtml(raw) {
-  return String(raw)
+function escapeHtml(value) {
+  return String(value)
     .replaceAll("&", "&amp;")
     .replaceAll("<", "&lt;")
     .replaceAll(">", "&gt;")
@@ -496,13 +500,21 @@ function escapeHtml(raw) {
     .replaceAll("'", "&#39;");
 }
 
+function renderStepMeta(step) {
+  return step.eyebrow
+    ? `<div class="step-meta">${escapeHtml(step.eyebrow)}</div>`
+    : "";
+}
+
 function renderOptions(step) {
   const selected = getAnswer(step.id);
-  const selectedSet = new Set(Array.isArray(selected) ? selected : [selected].filter((v) => v !== undefined));
-  const className = step.options.length > 4 ? "options" : "options cols-2";
+  const selectedSet = new Set(
+    Array.isArray(selected) ? selected : [selected].filter((item) => item !== undefined)
+  );
+  const many = step.type === "multi" || step.options.length > 4;
 
   return `
-    <div class="${className}">
+    <div class="options" data-many="${many}">
       ${step.options
         .map((option, index) => {
           const isSelected = selectedSet.has(index);
@@ -523,7 +535,7 @@ function renderOptions(step) {
 }
 
 function renderNavigation(step) {
-  const nextLabel = step.nextLabel || "Дальше";
+  const nextLabel = step.nextLabel || "Continue";
   return `
     <div class="step-actions">
       <button type="button" class="btn btn-primary" data-action="next-step">${escapeHtml(nextLabel)}</button>
@@ -536,23 +548,37 @@ function renderHeroStep(step) {
   return `
     <article class="step hero">
       <div class="hero-copy">
+        ${renderStepMeta({ eyebrow: "Personal growth quiz" })}
         <h1>${step.title.replaceAll("\n", "<br />")}</h1>
         <p>${escapeHtml(step.description)}</p>
         <div class="hero-pill-row">
           ${step.pills.map((pill) => `<span class="hero-pill">${escapeHtml(pill)}</span>`).join("")}
         </div>
-        <button type="button" class="btn btn-primary" data-action="next-step">${escapeHtml(step.cta)}</button>
+        <div class="step-actions">
+          <button type="button" class="btn btn-primary" data-action="next-step">${escapeHtml(step.cta)}</button>
+        </div>
       </div>
+
       <div class="hero-visual" aria-hidden="true">
-        <div class="hero-gradient-bar"></div>
-        <div class="hero-stat">
-          <div>
-            <strong>500K+</strong>
-            <span>участников уже в программе</span>
+        <div class="hero-overlay"></div>
+        <div class="hero-device">
+          <div class="hero-device-header">
+            <span>Today</span>
+            <span>09:41</span>
           </div>
-          <div>
+          <div class="hero-device-card">
+            <strong>Calmer mind</strong>
+            <span>Short daily rituals, better attention, softer recovery.</span>
+          </div>
+        </div>
+        <div class="hero-footer">
+          <div class="hero-stat">
+            <strong>500K+</strong>
+            <span>people already inside</span>
+          </div>
+          <div class="hero-stat">
             <strong>4.9</strong>
-            <span>средняя оценка опыта</span>
+            <span>average experience rating</span>
           </div>
         </div>
       </div>
@@ -563,11 +589,16 @@ function renderHeroStep(step) {
 function renderInfoStep(step) {
   return `
     <article class="step">
-      <h2 class="question-title">${step.title}</h2>
-      <p class="question-description">${escapeHtml(step.description)}</p>
-      <div class="info-box">${escapeHtml(step.box)}</div>
-      <div class="step-actions">
-        <button type="button" class="btn btn-primary" data-action="next-step">${escapeHtml(step.cta || "Продолжить")}</button>
+      <div class="content-stack">
+        ${renderStepMeta(step)}
+        <div class="info-copy">
+          <h2 class="question-title">${escapeHtml(step.title)}</h2>
+          <p class="question-description">${escapeHtml(step.description)}</p>
+          <p class="note-inline">${escapeHtml(step.note)}</p>
+        </div>
+        <div class="step-actions">
+          <button type="button" class="btn btn-primary" data-action="next-step">${escapeHtml(step.cta || "Continue")}</button>
+        </div>
       </div>
     </article>
   `;
@@ -576,10 +607,13 @@ function renderInfoStep(step) {
 function renderQuestionStep(step) {
   return `
     <article class="step">
-      <h2 class="question-title">${escapeHtml(step.question)}</h2>
-      ${step.description ? `<p class="question-description">${escapeHtml(step.description)}</p>` : ""}
-      ${renderOptions(step)}
-      ${renderNavigation(step)}
+      <div class="content-stack">
+        ${renderStepMeta(step)}
+        <h2 class="question-title">${escapeHtml(step.question)}</h2>
+        ${step.description ? `<p class="question-description">${escapeHtml(step.description)}</p>` : ""}
+        ${renderOptions(step)}
+        ${renderNavigation(step)}
+      </div>
     </article>
   `;
 }
@@ -588,37 +622,39 @@ function renderInputStep(step) {
   const currentValue = escapeHtml(getAnswer(step.id) || "");
   return `
     <article class="step">
-      <h2 class="question-title">${escapeHtml(step.question)}</h2>
-      <p class="question-description">${escapeHtml(step.description || "")}</p>
-      <div class="input-wrap">
-        <input
-          id="textInput"
-          class="text-input"
-          type="${escapeHtml(step.inputType || "text")}"
-          placeholder="${escapeHtml(step.placeholder || "")}"
-          value="${currentValue}"
-          autocomplete="${step.field === "email" ? "email" : "given-name"}"
-        />
+      <div class="content-stack">
+        ${renderStepMeta(step)}
+        <h2 class="question-title">${escapeHtml(step.question)}</h2>
+        <p class="question-description">${escapeHtml(step.description || "")}</p>
+        <div class="input-wrap">
+          <input
+            id="textInput"
+            class="text-input"
+            type="${escapeHtml(step.inputType || "text")}"
+            placeholder="${escapeHtml(step.placeholder || "")}"
+            value="${currentValue}"
+            autocomplete="${step.field === "email" ? "email" : "given-name"}"
+          />
+        </div>
+        ${renderNavigation(step)}
       </div>
-      ${renderNavigation(step)}
     </article>
   `;
 }
 
-function getInitials(name) {
-  const source = String(name || "").trim();
-  if (!source) return "Гость";
-  return source;
+function getDisplayName(name) {
+  const clean = String(name || "").trim();
+  return clean || "there";
 }
 
 function computeSummary() {
-  let normalizedTotal = 0;
-  let normalizedCount = 0;
+  let total = 0;
+  let count = 0;
   const tags = {};
 
   for (const step of steps) {
     if (!["single", "multi"].includes(step.type)) continue;
-    if (!Array.isArray(step.options) || step.options.length === 0) continue;
+    if (!Array.isArray(step.options)) continue;
     if (!step.options.some((option) => typeof option.score === "number")) continue;
 
     const answer = getAnswer(step.id);
@@ -630,13 +666,14 @@ function computeSummary() {
       .filter(Boolean)
       .filter((option) => typeof option.score === "number");
 
-    if (selectedOptions.length === 0) continue;
+    if (!selectedOptions.length) continue;
 
-    const maxOptionScore = Math.max(...step.options.map((option) => option.score || 0), 1);
-    const avgScore =
-      selectedOptions.reduce((sum, option) => sum + (option.score || 0), 0) / selectedOptions.length;
-    normalizedTotal += avgScore / maxOptionScore;
-    normalizedCount += 1;
+    const maxScore = Math.max(...step.options.map((option) => option.score || 0), 1);
+    const averageScore =
+      selectedOptions.reduce((sum, option) => sum + option.score, 0) / selectedOptions.length;
+
+    total += averageScore / maxScore;
+    count += 1;
 
     for (const option of selectedOptions) {
       const optionTags = Array.isArray(option.tags) ? option.tags : [];
@@ -646,105 +683,118 @@ function computeSummary() {
     }
   }
 
-  const score = normalizedCount === 0 ? 0 : Math.round((normalizedTotal / normalizedCount) * 100);
-  const sortedTags = Object.entries(tags)
+  const score = count ? Math.round((total / count) * 100) : 0;
+  const topTags = Object.entries(tags)
     .sort((a, b) => b[1] - a[1])
-    .map(([tag]) => tag);
+    .map(([tag]) => tag)
+    .slice(0, 3);
+  const fallbackTags = ["focus", "energy", "balance"];
+  const insightTags = topTags.length ? topTags : fallbackTags;
 
-  const topTags = sortedTags.length > 0 ? sortedTags.slice(0, 3) : ["focus", "energy", "balance"];
-  const insights = topTags.map((tag) => insightMap[tag]).filter(Boolean);
-
-  return { score, insights };
+  return {
+    score,
+    insights: insightTags.map((tag) => insightMap[tag]).filter(Boolean),
+  };
 }
 
 function renderSummaryStep() {
   const { score, insights } = computeSummary();
-  const scoreDegrees = Math.max(4, Math.min(360, Math.round((score / 100) * 360)));
-  const name = getInitials(getAnswer("name"));
+  const scoreDegrees = Math.max(6, Math.min(360, Math.round((score / 100) * 360)));
+  const name = getDisplayName(getAnswer("name"));
 
   return `
     <article class="step">
-      <h2 class="question-title">Профиль готов, ${escapeHtml(name)}</h2>
-      <p class="question-description">
-        Ниже стартовая оценка твоего текущего уровня устойчивости. Это не диагноз, а точка отсчета для программы.
-      </p>
+      <div class="content-stack">
+        <div class="step-meta">Your profile</div>
+        <h2 class="question-title">Your profile is ready, ${escapeHtml(name)}.</h2>
+        <p class="question-description">
+          This is your current resilience score. It is not a diagnosis. It is a starting point for your plan.
+        </p>
 
-      <div class="summary-grid">
-        <div>
-          <div class="score-ring" style="background: conic-gradient(var(--accent) ${scoreDegrees}deg, #d9e4ff ${scoreDegrees}deg)">
-            <div class="score-ring-inner">
-              <div>
-                <div class="score-value">${score}</div>
-                <div class="score-note">индекс устойчивости</div>
+        <div class="summary-grid">
+          <div>
+            <div class="score-ring" style="background: conic-gradient(var(--accent) ${scoreDegrees}deg, #ffe9dc ${scoreDegrees}deg)">
+              <div class="score-ring-inner">
+                <div>
+                  <div class="score-value">${score}</div>
+                  <div class="score-note">resilience index</div>
+                </div>
               </div>
             </div>
           </div>
+
+          <div class="summary-cards">
+            ${insights
+              .map(
+                (insight) => `
+                  <article class="summary-card">
+                    <h3>${escapeHtml(insight.title)}</h3>
+                    <p>${escapeHtml(insight.text)}</p>
+                  </article>
+                `
+              )
+              .join("")}
+            <article class="summary-card">
+              <h3>What this means</h3>
+              <p>Your strongest plan is likely a gentle one: short daily moves, high clarity, and almost no wasted friction.</p>
+            </article>
+          </div>
         </div>
 
-        <div class="summary-cards">
-          ${insights
-            .map(
-              (item) => `
-              <article class="summary-card">
-                <h3>${escapeHtml(item.title)}</h3>
-                <p>${escapeHtml(item.text)}</p>
-              </article>
-            `
-            )
-            .join("")}
-          <article class="summary-card">
-            <h3>Что это значит на практике</h3>
-            <p>План будет коротким и выполнимым: ежедневные микрошаги, еженедельные фокусы и четкий трек прогресса без перегруза.</p>
-          </article>
+        <div class="step-actions">
+          <button type="button" class="btn btn-primary" data-action="next-step">See my plan</button>
         </div>
-      </div>
-
-      <div class="step-actions">
-        <button type="button" class="btn btn-primary" data-action="next-step">Посмотреть мой план</button>
       </div>
     </article>
   `;
 }
 
 function renderPlanStep() {
-  const name = getInitials(getAnswer("name"));
+  const name = getDisplayName(getAnswer("name"));
+  const dailyGoalStep = steps.find((step) => step.id === "daily_goal");
   const dailyGoalIndex = getAnswer("daily_goal");
-  const dailyGoal = dailyGoalIndex !== undefined ? steps.find((s) => s.id === "daily_goal").options[dailyGoalIndex].label : "10-15 минут";
+  const dailyGoal =
+    dailyGoalIndex !== undefined && dailyGoalStep
+      ? dailyGoalStep.options[dailyGoalIndex].label
+      : "10 minutes";
 
   return `
     <article class="step">
-      <h2 class="question-title">План ${escapeHtml(name)}: первые 4 недели</h2>
-      <p class="question-description">
-        Мы собрали стартовый маршрут под твой ритм. Базовая нагрузка: <strong>${escapeHtml(dailyGoal)}</strong> в день.
-      </p>
+      <div class="content-stack">
+        <div class="step-meta">Starter path</div>
+        <h2 class="question-title">${escapeHtml(name)}, here is your first four-week direction.</h2>
+        <p class="question-description">
+          The plan is tuned for a daily commitment of <strong>${escapeHtml(dailyGoal)}</strong>.
+        </p>
 
-      <div class="plan-columns">
-        <article class="plan-card">
-          <h3>Неделя 1. Стабилизация</h3>
-          <p>Убираем перегруз: дыхательная техника 2 раза в день, вечерний чек-ин и короткие паузы восстановления.</p>
-        </article>
-        <article class="plan-card">
-          <h3>Неделя 2. Фокус</h3>
-          <p>Добавляем 1-2 фокус-блока в день, снижаем контекстные переключения и фиксируем реальные триггеры отвлечения.</p>
-        </article>
-        <article class="plan-card">
-          <h3>Неделя 3. Уверенность</h3>
-          <p>Работа с внутренним критиком, тренировка ясной коммуникации и упражнения на устойчивые решения.</p>
-        </article>
-        <article class="plan-card">
-          <h3>Неделя 4. Закрепление</h3>
-          <p>Переносим инструменты в обычную жизнь и собираем персональную систему поддержания результата.</p>
-        </article>
-      </div>
+        <div class="plan-columns">
+          <article class="plan-card">
+            <h3>Week 1. Reset the nervous system</h3>
+            <p>Light reset rituals, smoother transitions, and less emotional carry-over through the day.</p>
+          </article>
+          <article class="plan-card">
+            <h3>Week 2. Protect attention</h3>
+            <p>Lower distraction, shape cleaner work blocks, and create more deliberate starts to important tasks.</p>
+          </article>
+          <article class="plan-card">
+            <h3>Week 3. Build self-trust</h3>
+            <p>Reduce harsh self-talk, make decisions with less drag, and practice steadier internal feedback.</p>
+          </article>
+          <article class="plan-card">
+            <h3>Week 4. Lock in the rhythm</h3>
+            <p>Turn the strongest tools into a repeatable routine that still feels elegant on busy days.</p>
+          </article>
+        </div>
 
-      <div class="footer-badges">
-        <span class="footer-badge">Ежедневные микро-уроки</span>
-        <span class="footer-badge">Групповые практики 5 дней в неделю</span>
-        <span class="footer-badge">Проверка прогресса каждую неделю</span>
-      </div>
+        <div class="footer-badges">
+          <span class="footer-badge">Daily micro sessions</span>
+          <span class="footer-badge">Gentle weekly structure</span>
+          <span class="footer-badge">Built for real life pace</span>
+        </div>
 
-      <div class="step-actions">
-        <button type="button" class="btn btn-primary" data-action="next-step">Собрать финальную версию</button>
+        <div class="step-actions">
+          <button type="button" class="btn btn-primary" data-action="next-step">Build the final version</button>
+        </div>
       </div>
     </article>
   `;
@@ -753,38 +803,52 @@ function renderPlanStep() {
 function renderLoadingStep(step) {
   return `
     <article class="step">
-      <h2 class="question-title">${escapeHtml(step.title)}</h2>
-      <p class="question-description">${escapeHtml(step.description)}</p>
-      <div class="loader-wrap">
-        <div class="loader-bar">
-          <div id="loaderFill" class="loader-fill"></div>
+      <div class="content-stack">
+        <div class="step-meta">Personalization in progress</div>
+        <h2 class="question-title">${escapeHtml(step.title)}</h2>
+        <p class="question-description">${escapeHtml(step.description)}</p>
+        <div class="loader-wrap">
+          <div class="loader-bar">
+            <div id="loaderFill" class="loader-fill"></div>
+          </div>
+          <div id="loaderText" class="question-description">Preparing your plan... 0%</div>
         </div>
-        <div id="loaderText" class="question-description">Подготовка рекомендаций... 0%</div>
       </div>
     </article>
   `;
 }
 
 function renderFinalStep() {
-  const name = getInitials(getAnswer("name"));
-  const email = getAnswer("email") || "your@email.com";
+  const name = getDisplayName(getAnswer("name"));
+  const email = getAnswer("email") || "you@example.com";
   return `
     <article class="step">
-      <h2 class="question-title">Готово, ${escapeHtml(name)}. Твой квиз NewMindStart опубликован локально</h2>
-      <p class="final-note">
-        Мы зафиксировали твой персональный профиль и структуру плана. Отчет привязан к адресу <strong>${escapeHtml(
-          email
-        )}</strong>.
-        Это демо-копия квиза в стиле NewMindStart, запущенная на локальном сервере.
-      </p>
-      <div class="info-box">
-        Следующий шаг: подключить реальную отправку email/CRM и платежный модуль, если нужно превратить демо в продакшн-воронку.
-      </div>
-      <div class="step-actions">
-        <button type="button" class="btn btn-primary" data-action="restart">Пройти еще раз</button>
+      <div class="content-stack">
+        <div class="step-meta">All set</div>
+        <h2 class="question-title">Your NewMindStart quiz is ready, ${escapeHtml(name)}.</h2>
+        <p class="final-note">
+          Your personalized starter profile is linked to <strong>${escapeHtml(email)}</strong>. This version is optimized for a polished mobile-first experience and a cleaner premium visual system.
+        </p>
+        <p class="note-inline">
+          Next natural step: connect the form to a real email flow, CRM, or checkout if you want to turn this into a production funnel.
+        </p>
+        <div class="step-actions">
+          <button type="button" class="btn btn-primary" data-action="restart">Start again</button>
+        </div>
       </div>
     </article>
   `;
+}
+
+function clearLoadingResources() {
+  if (state.loadingTimer) {
+    window.clearTimeout(state.loadingTimer);
+    state.loadingTimer = null;
+  }
+  if (state.loadingInterval) {
+    window.clearInterval(state.loadingInterval);
+    state.loadingInterval = null;
+  }
 }
 
 function renderStep() {
@@ -828,13 +892,15 @@ function renderStep() {
 
 function updateHeader() {
   const step = getCurrentStep();
-  const trackedPosition = trackedStepIndices.findIndex((index) => index === state.currentStepIndex);
-  const displayRatio =
+  const trackedPosition = trackedStepIndices.findIndex(
+    (index) => index === state.currentStepIndex
+  );
+  const ratio =
     trackedPosition < 0 || trackedStepIndices.length === 0
       ? 0
       : (trackedPosition + 1) / trackedStepIndices.length;
 
-  const percent = Math.round(displayRatio * 100);
+  const percent = Math.round(ratio * 100);
   progressBarEl.style.width = `${percent}%`;
   progressTextEl.textContent = `${percent}%`;
 
@@ -856,7 +922,7 @@ function validateStep(step) {
   if (step.type === "single") {
     const answer = getAnswer(step.id);
     if (answer === undefined || answer === null) {
-      return "Выбери один вариант, чтобы продолжить.";
+      return "Choose one answer to continue.";
     }
     return null;
   }
@@ -864,22 +930,25 @@ function validateStep(step) {
   if (step.type === "multi") {
     const answer = getAnswer(step.id);
     if (!Array.isArray(answer) || answer.length === 0) {
-      return "Выбери хотя бы один вариант.";
+      return "Choose at least one answer.";
     }
     return null;
   }
 
   if (step.type === "input") {
     const answer = String(getAnswer(step.id) || "").trim();
-    if (!answer) return "Заполни поле, чтобы продолжить.";
+    if (!answer) {
+      return "Please fill in the field to continue.";
+    }
     if (step.field === "email") {
-      const isValidEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(answer);
-      if (!isValidEmail) return "Введи корректный email.";
+      const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailPattern.test(answer)) {
+        return "Please enter a valid email.";
+      }
     }
     if (step.field === "name" && answer.length < 2) {
-      return "Имя должно быть не короче 2 символов.";
+      return "Please enter at least 2 characters.";
     }
-    return null;
   }
 
   return null;
@@ -906,30 +975,19 @@ function previousStep() {
   goToStep(state.currentStepIndex - 1);
 }
 
-function clearLoadingResources() {
-  if (state.loadingTimer) {
-    window.clearTimeout(state.loadingTimer);
-    state.loadingTimer = null;
-  }
-  if (state.loadingInterval) {
-    window.clearInterval(state.loadingInterval);
-    state.loadingInterval = null;
-  }
-}
-
 function startLoadingSequence(durationMs) {
   const loaderFill = document.getElementById("loaderFill");
   const loaderText = document.getElementById("loaderText");
   if (!loaderFill || !loaderText) return;
 
-  const started = Date.now();
+  const startedAt = Date.now();
   state.loadingInterval = window.setInterval(() => {
-    const elapsed = Date.now() - started;
+    const elapsed = Date.now() - startedAt;
     const ratio = Math.min(1, elapsed / durationMs);
     const percent = Math.round(ratio * 100);
     loaderFill.style.width = `${percent}%`;
-    loaderText.textContent = `Подготовка рекомендаций... ${percent}%`;
-  }, 110);
+    loaderText.textContent = `Preparing your plan... ${percent}%`;
+  }, 120);
 
   state.loadingTimer = window.setTimeout(() => {
     clearLoadingResources();
@@ -946,13 +1004,15 @@ function toggleOption(step, optionIndex) {
 
   if (step.type === "multi") {
     const current = getAnswer(step.id);
-    const selected = new Set(Array.isArray(current) ? current : []);
-    if (selected.has(optionIndex)) {
-      selected.delete(optionIndex);
+    const nextSelection = new Set(Array.isArray(current) ? current : []);
+
+    if (nextSelection.has(optionIndex)) {
+      nextSelection.delete(optionIndex);
     } else {
-      selected.add(optionIndex);
+      nextSelection.add(optionIndex);
     }
-    setAnswer(step.id, Array.from(selected).sort((a, b) => a - b));
+
+    setAnswer(step.id, Array.from(nextSelection).sort((a, b) => a - b));
     renderStep();
   }
 }
@@ -966,7 +1026,9 @@ appEl.addEventListener("click", (event) => {
 
   if (action === "select-option") {
     const index = Number(target.dataset.index);
-    if (!Number.isNaN(index)) toggleOption(step, index);
+    if (!Number.isNaN(index)) {
+      toggleOption(step, index);
+    }
     return;
   }
 
@@ -981,8 +1043,6 @@ appEl.addEventListener("click", (event) => {
   }
 });
 
-backButtonEl.addEventListener("click", () => {
-  previousStep();
-});
+backButtonEl.addEventListener("click", previousStep);
 
 renderStep();
