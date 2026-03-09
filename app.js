@@ -3,6 +3,11 @@ const progressBarEl = document.getElementById("progressBar");
 const progressTextEl = document.getElementById("progressText");
 const backButtonEl = document.getElementById("backButton");
 
+function optimizeImage(url, width = 900) {
+  if (!url.includes("images.unsplash.com")) return url;
+  return `${url}&auto=format&fit=crop&w=${width}&q=68`;
+}
+
 const steps = [
   {
     id: "welcome",
@@ -33,6 +38,13 @@ const steps = [
     id: "teaser_people",
     type: "info",
     eyebrow: "Why this works",
+    visual: {
+      image: optimizeImage(
+        "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?",
+        1200
+      ),
+      label: "Human-centered guidance",
+    },
     title: "More than 500,000 people have already stepped into NewMindStart.",
     description:
       "The goal is not to label you. The goal is to spot the patterns that are quietly shaping your days.",
@@ -314,6 +326,13 @@ const steps = [
     id: "evidence",
     type: "info",
     eyebrow: "Built with intention",
+    visual: {
+      image: optimizeImage(
+        "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?",
+        1200
+      ),
+      label: "Evidence-based design",
+    },
     title: "NewMindStart is shaped by evidence-based behavioral methods.",
     description:
       "We draw from CBT, behavior design, emotional regulation tools, and micro-learning so the plan feels realistic on an actual busy day.",
@@ -343,6 +362,13 @@ const steps = [
     id: "teaser_community",
     type: "info",
     eyebrow: "Momentum matters",
+    visual: {
+      image: optimizeImage(
+        "https://images.unsplash.com/photo-1511988617509-a57c8a288659?",
+        1200
+      ),
+      label: "Community support",
+    },
     title: "People do better when growth feels supported, not lonely.",
     description:
       "Structured sessions, gentle accountability, and compact routines make it easier to stay with the process long enough to see change.",
@@ -421,6 +447,17 @@ const state = {
   answers: {},
   loadingInterval: null,
   loadingTimer: null,
+  selectedPlan: "7d",
+  checkoutOpen: false,
+  checkoutForm: {
+    email: "",
+    cardName: "",
+    cardNumber: "",
+    expiry: "",
+    cvc: "",
+  },
+  dashboardOpen: false,
+  appTab: "home",
 };
 
 const trackedStepIndices = steps
@@ -481,145 +518,192 @@ const insightMap = {
 
 const questionArtMap = {
   age: {
-    image:
-      "https://images.unsplash.com/photo-1517486808906-6ca8b3f04846?auto=format&fit=crop&w=1200&q=80",
+    image: optimizeImage("https://images.unsplash.com/photo-1517486808906-6ca8b3f04846?"),
     label: "Personalized by life stage",
   },
   energy_after_rest: {
-    image:
-      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=1200&q=80",
+    image: optimizeImage("https://images.unsplash.com/photo-1494790108377-be9c29b29330?"),
     label: "Daily energy",
   },
   deadline_delay: {
-    image:
-      "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1200&q=80",
+    image: optimizeImage("https://images.unsplash.com/photo-1516321318423-f06f85e504b3?"),
     label: "Focus habits",
   },
   distracted_level: {
-    image:
-      "https://images.unsplash.com/photo-1517048676732-d65bc937f952?auto=format&fit=crop&w=1200&q=80",
+    image: optimizeImage("https://images.unsplash.com/photo-1517048676732-d65bc937f952?"),
     label: "Attention pattern",
   },
   overwhelm_feeling: {
-    image:
-      "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=80",
+    image: optimizeImage("https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?"),
     label: "Stress rhythm",
   },
   mood_swings: {
-    image:
-      "https://images.unsplash.com/photo-1494790108755-2616b612b786?auto=format&fit=crop&w=1200&q=80",
+    image: optimizeImage("https://images.unsplash.com/photo-1494790108755-2616b612b786?"),
     label: "Emotional balance",
   },
   inner_harmony: {
-    image:
-      "https://images.unsplash.com/photo-1511988617509-a57c8a288659?auto=format&fit=crop&w=1200&q=80",
+    image: optimizeImage("https://images.unsplash.com/photo-1511988617509-a57c8a288659?"),
     label: "Inner alignment",
   },
   statement_emotions: {
-    image:
-      "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=1200&q=80",
+    image: optimizeImage("https://images.unsplash.com/photo-1524504388940-b1c1722653e1?"),
     label: "Emotional openness",
   },
   statement_tasks: {
-    image:
-      "https://images.unsplash.com/photo-1494172961521-33799ddd43a5?auto=format&fit=crop&w=1200&q=80",
+    image: optimizeImage("https://images.unsplash.com/photo-1494172961521-33799ddd43a5?"),
     label: "Mental load",
   },
   statement_decisions: {
-    image:
-      "https://images.unsplash.com/photo-1524502397800-2eeaad7c3fe5?auto=format&fit=crop&w=1200&q=80",
+    image: optimizeImage("https://images.unsplash.com/photo-1524502397800-2eeaad7c3fe5?"),
     label: "Decision confidence",
   },
   statement_fear_fail: {
-    image:
-      "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&w=1200&q=80",
+    image: optimizeImage("https://images.unsplash.com/photo-1521572267360-ee0c2909d518?"),
     label: "Self trust",
   },
   compliments: {
-    image:
-      "https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&w=1200&q=80",
+    image: optimizeImage("https://images.unsplash.com/photo-1529139574466-a303027c1d8b?"),
     label: "Self worth",
   },
   social_insecurity: {
-    image:
-      "https://images.unsplash.com/photo-1524503033411-c9566986fc8f?auto=format&fit=crop&w=1200&q=80",
+    image: optimizeImage("https://images.unsplash.com/photo-1524503033411-c9566986fc8f?"),
     label: "Social ease",
   },
   overthinking_partner: {
-    image:
-      "https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?auto=format&fit=crop&w=1200&q=80",
+    image: optimizeImage("https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?"),
     label: "Relationship pattern",
   },
   others_first: {
-    image:
-      "https://images.unsplash.com/photo-1517457373958-b7bdd4587205?auto=format&fit=crop&w=1200&q=80",
+    image: optimizeImage("https://images.unsplash.com/photo-1517457373958-b7bdd4587205?"),
     label: "Boundaries",
   },
   last_motivation: {
-    image:
-      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=1200&q=80",
+    image: optimizeImage("https://images.unsplash.com/photo-1494790108377-be9c29b29330?"),
     label: "Motivation",
   },
   improve_areas: {
-    image:
-      "https://images.unsplash.com/photo-1511988617509-a57c8a288659?auto=format&fit=crop&w=1200&q=80",
+    image: optimizeImage("https://images.unsplash.com/photo-1511988617509-a57c8a288659?"),
     label: "Growth areas",
   },
   morning_first: {
-    image:
-      "https://images.unsplash.com/photo-1494390248081-4e521a5940db?auto=format&fit=crop&w=1200&q=80",
+    image: optimizeImage("https://images.unsplash.com/photo-1494390248081-4e521a5940db?"),
     label: "Morning rhythm",
   },
   physical_activity: {
-    image:
-      "https://images.unsplash.com/photo-1518611012118-696072aa579a?auto=format&fit=crop&w=1200&q=80",
+    image: optimizeImage("https://images.unsplash.com/photo-1518611012118-696072aa579a?"),
     label: "Movement",
   },
   quit_habits: {
-    image:
-      "https://images.unsplash.com/photo-1494173853739-c21f58b16055?auto=format&fit=crop&w=1200&q=80",
+    image: optimizeImage("https://images.unsplash.com/photo-1494173853739-c21f58b16055?"),
     label: "Habit reset",
   },
   sleep_improve: {
-    image:
-      "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=1200&q=80",
+    image: optimizeImage("https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?"),
     label: "Sleep",
   },
   recent_triggers: {
-    image:
-      "https://images.unsplash.com/photo-1519834785169-98be25ec3f84?auto=format&fit=crop&w=1200&q=80",
+    image: optimizeImage("https://images.unsplash.com/photo-1519834785169-98be25ec3f84?"),
     label: "Pressure points",
   },
   happier_life: {
-    image:
-      "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=1200&q=80",
+    image: optimizeImage("https://images.unsplash.com/photo-1524504388940-b1c1722653e1?"),
     label: "What matters most",
   },
   plan_targets: {
-    image:
-      "https://images.unsplash.com/photo-1508672019048-805c876b67e2?auto=format&fit=crop&w=1200&q=80",
+    image: optimizeImage("https://images.unsplash.com/photo-1508672019048-805c876b67e2?"),
     label: "Plan direction",
   },
   behavior_knowledge: {
-    image:
-      "https://images.unsplash.com/photo-1517048676732-d65bc937f952?auto=format&fit=crop&w=1200&q=80",
+    image: optimizeImage("https://images.unsplash.com/photo-1517048676732-d65bc937f952?"),
     label: "Behavior tools",
   },
   heard_expert: {
-    image:
-      "https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=1200&q=80",
+    image: optimizeImage("https://images.unsplash.com/photo-1544717305-2782549b5136?"),
     label: "Guided choice",
   },
   daily_goal: {
-    image:
-      "https://images.unsplash.com/photo-1499750310107-5fef28a66643?auto=format&fit=crop&w=1200&q=80",
+    image: optimizeImage("https://images.unsplash.com/photo-1499750310107-5fef28a66643?"),
     label: "Daily commitment",
   },
   newsletter: {
-    image:
-      "https://images.unsplash.com/photo-1516321165247-4aa89a48be28?auto=format&fit=crop&w=1200&q=80",
+    image: optimizeImage("https://images.unsplash.com/photo-1516321165247-4aa89a48be28?"),
     label: "Weekly support",
   },
+};
+
+const plans = [
+  {
+    id: "7d",
+    badge: "Trial",
+    title: "7 days",
+    price: "$5.90",
+    subtitle: "Starter access",
+    note: "Then $34.99 every 4 weeks",
+    cta: "Start 7-day trial",
+  },
+  {
+    id: "30d",
+    badge: "Most popular",
+    title: "30 days",
+    price: "$24.90",
+    subtitle: "Full monthly reset",
+    note: "One payment, full access",
+    cta: "Get 30-day access",
+  },
+  {
+    id: "90d",
+    badge: "Best value",
+    title: "90 days",
+    price: "$59.90",
+    subtitle: "Deep transformation plan",
+    note: "Save more for a longer arc",
+    cta: "Get 90-day access",
+  },
+];
+
+const dashboardData = {
+  recommended: [
+    "Calmer Mind Reset",
+    "Focus Architecture",
+    "Sleep Repair",
+    "Emotional Balance"
+  ],
+  bookmarks: [
+    "Morning Ease",
+    "Body Confidence",
+    "Voice and Breath",
+    "Creative Recovery"
+  ],
+  watching: [
+    "Stress Release Flow",
+    "Deep Focus Sprint",
+    "Gentle Evening Reset"
+  ],
+  live: [
+    "Live Breathwork Session",
+    "Weekly Group Reflection",
+    "Mind + Body Alignment"
+  ],
+  newest: [
+    "Healing Through Movement",
+    "Brain Clarity Protocol",
+    "Creative Confidence",
+    "Massage for Reset"
+  ],
+  categories: [
+    "Dance movement",
+    "Fitness and health",
+    "Creativity and arts",
+    "Brain",
+    "Singing",
+    "Healing",
+    "Massage"
+  ],
+  messages: [
+    { title: "Focus Architecture Group", text: "New session notes are live." },
+    { title: "Emma R.", text: "Loved the breathwork class today." },
+    { title: "Sleep Repair Cohort", text: "Reminder: live Q&A tomorrow." }
+  ],
 };
 
 function getCurrentStep() {
@@ -680,13 +764,37 @@ function renderOptions(step) {
 function renderQuestionVisual(step) {
   const art = questionArtMap[step.id];
   if (!art) return "";
+  const tone = getIllustrationTone(step.id);
 
   return `
-    <div class="question-visual" aria-hidden="true">
-      <img class="question-visual-image" src="${escapeHtml(art.image)}" alt="" />
+    <div class="question-visual illustration ${tone}" aria-hidden="true">
+      <div class="illustration-orb illustration-orb--a"></div>
+      <div class="illustration-orb illustration-orb--b"></div>
+      <div class="illustration-wave"></div>
       <div class="question-visual-chip">${escapeHtml(art.label)}</div>
     </div>
   `;
+}
+
+function renderInfoVisual(step) {
+  if (!step.visual) return "";
+  const tone = getIllustrationTone(step.id);
+  return `
+    <div class="info-visual illustration ${tone}" aria-hidden="true">
+      <div class="illustration-orb illustration-orb--a"></div>
+      <div class="illustration-orb illustration-orb--b"></div>
+      <div class="illustration-wave"></div>
+      <div class="info-visual-chip">${escapeHtml(step.visual.label)}</div>
+    </div>
+  `;
+}
+
+function getIllustrationTone(seed) {
+  const tones = ["tone-peach", "tone-sand", "tone-apricot", "tone-gold"];
+  const index = String(seed)
+    .split("")
+    .reduce((sum, char) => sum + char.charCodeAt(0), 0) % tones.length;
+  return tones[index];
 }
 
 function renderNavigation(step) {
@@ -746,6 +854,7 @@ function renderInfoStep(step) {
     <article class="step">
       <div class="content-stack">
         ${renderStepMeta(step)}
+        ${renderInfoVisual(step)}
         <div class="info-copy">
           <h2 class="question-title">${escapeHtml(step.title)}</h2>
           <p class="question-description">${escapeHtml(step.description)}</p>
@@ -977,6 +1086,12 @@ function renderLoadingStep(step) {
 function renderFinalStep() {
   const name = getDisplayName(getAnswer("name"));
   const email = getAnswer("email") || "you@example.com";
+  const selectedPlan = plans.find((plan) => plan.id === state.selectedPlan) || plans[0];
+
+  if (state.checkoutOpen) {
+    return renderCheckoutStep(selectedPlan, name, email);
+  }
+
   return `
     <article class="step">
       <div class="content-stack">
@@ -993,17 +1108,29 @@ function renderFinalStep() {
               <span class="footer-badge">Designed for mobile first</span>
             </div>
           </div>
-          <div class="offer-card">
-            <div class="offer-card-top">
-              <span class="offer-label">Best value</span>
-              <div class="offer-price">
-                <strong>$5.90</strong>
-                <span>for your first 7 days</span>
-              </div>
-              <p class="offer-price-note">Then $34.99 every 4 weeks. Cancel anytime.</p>
-            </div>
-            <button type="button" class="btn btn-primary offer-cta">Start 7-day trial</button>
-            <p class="offer-security">Secure checkout. Instant access on mobile and desktop.</p>
+          <div class="offer-plan-stack">
+            ${plans
+              .map(
+                (plan) => `
+                  <button
+                    type="button"
+                    class="offer-plan ${plan.id === selectedPlan.id ? "offer-plan--selected" : ""}"
+                    data-action="choose-plan"
+                    data-plan="${plan.id}"
+                  >
+                    <span class="offer-label">${escapeHtml(plan.badge)}</span>
+                    <div class="offer-plan-main">
+                      <div>
+                        <strong>${escapeHtml(plan.title)}</strong>
+                        <span>${escapeHtml(plan.subtitle)}</span>
+                      </div>
+                      <div class="offer-plan-price">${escapeHtml(plan.price)}</div>
+                    </div>
+                    <p class="offer-price-note">${escapeHtml(plan.note)}</p>
+                  </button>
+                `
+              )
+              .join("")}
           </div>
         </div>
 
@@ -1040,10 +1167,251 @@ function renderFinalStep() {
         </div>
 
         <div class="step-actions offer-actions">
-          <button type="button" class="btn btn-primary offer-cta">Continue to checkout</button>
+          <button type="button" class="btn btn-primary offer-cta" data-action="open-checkout">${escapeHtml(
+            selectedPlan.cta
+          )}</button>
           <button type="button" class="btn offer-secondary" data-action="restart">Retake the quiz</button>
         </div>
       </div>
+    </article>
+  `;
+}
+
+function renderCheckoutStep(plan, name, email) {
+  const form = state.checkoutForm;
+  return `
+    <article class="step app-screen">
+      <div class="content-stack">
+        <div class="checkout-topbar">
+          <button type="button" class="back-button checkout-back" data-action="close-checkout">&#8592;</button>
+          <span class="step-meta">Secure checkout</span>
+        </div>
+
+        <div class="checkout-card">
+          <div class="checkout-summary">
+            <div>
+              <div class="offer-label">${escapeHtml(plan.badge)}</div>
+              <h2 class="question-title checkout-title">${escapeHtml(plan.title)} access for ${escapeHtml(name)}</h2>
+              <p class="question-description">You are purchasing full NewMindStart access linked to <strong>${escapeHtml(
+                email
+              )}</strong>.</p>
+            </div>
+            <div class="checkout-price-block">
+              <strong>${escapeHtml(plan.price)}</strong>
+              <span>${escapeHtml(plan.note)}</span>
+            </div>
+          </div>
+
+          <div class="stripe-shell">
+            <div class="stripe-bar">
+              <span>Pay with card</span>
+              <span>Powered by Stripe-style UI</span>
+            </div>
+            <div class="input-wrap">
+              <input class="text-input" id="checkoutEmail" data-checkout-field="email" type="email" placeholder="Email" value="${escapeHtml(
+                form.email || email
+              )}" />
+              <input class="text-input" id="checkoutName" data-checkout-field="cardName" type="text" placeholder="Cardholder name" value="${escapeHtml(
+                form.cardName
+              )}" />
+              <input class="text-input" id="checkoutNumber" data-checkout-field="cardNumber" type="text" inputmode="numeric" placeholder="Card number" value="${escapeHtml(
+                form.cardNumber
+              )}" />
+              <div class="checkout-row">
+                <input class="text-input" id="checkoutExpiry" data-checkout-field="expiry" type="text" placeholder="MM / YY" value="${escapeHtml(
+                  form.expiry
+                )}" />
+                <input class="text-input" id="checkoutCvc" data-checkout-field="cvc" type="text" inputmode="numeric" placeholder="CVC" value="${escapeHtml(
+                  form.cvc
+                )}" />
+              </div>
+            </div>
+            <div class="step-actions checkout-actions">
+              <button type="button" class="btn btn-primary" data-action="complete-purchase">Pay ${escapeHtml(
+                plan.price
+              )}</button>
+            </div>
+            <div id="errorText" class="hint-error"></div>
+          </div>
+        </div>
+      </div>
+    </article>
+  `;
+}
+
+function renderCourseRail(title, items, variant = "course") {
+  return `
+    <section class="dashboard-section">
+      <div class="dashboard-section-head">
+        <h3>${escapeHtml(title)}</h3>
+      </div>
+      <div class="rail">
+        ${items
+          .map((item, index) => {
+            return `
+              <article class="rail-card rail-card--${variant}">
+                <div class="rail-card-art illustration ${getIllustrationTone(item)}">
+                  <div class="illustration-orb illustration-orb--a"></div>
+                  <div class="illustration-orb illustration-orb--b"></div>
+                  <div class="illustration-wave"></div>
+                </div>
+                <div class="rail-card-copy">
+                  <strong>${escapeHtml(item)}</strong>
+                  <span>${variant === "live" ? "Reserve your seat" : "12 lessons"}</span>
+                </div>
+              </article>
+            `;
+          })
+          .join("")}
+      </div>
+    </section>
+  `;
+}
+
+function renderHomeTab() {
+  return `
+    <div class="dashboard-home">
+      <section class="dashboard-hero">
+        <div>
+          <span class="step-meta">Today for you</span>
+          <h2 class="question-title dashboard-title">Your personal NewMindStart home.</h2>
+          <p class="question-description">A calmer feed of what to start, save, resume, and join live.</p>
+        </div>
+      </section>
+      ${renderCourseRail("Recommended for you", dashboardData.recommended)}
+      ${renderCourseRail("Bookmarked", dashboardData.bookmarks)}
+      ${renderCourseRail("Continue watching", dashboardData.watching)}
+      ${renderCourseRail("Live sessions", dashboardData.live, "live")}
+      ${renderCourseRail("New courses", dashboardData.newest)}
+      <section class="dashboard-section">
+        <div class="dashboard-section-head"><h3>Categories</h3></div>
+        <div class="rail rail--chips">
+          ${dashboardData.categories
+            .map((category) => `<span class="category-chip">${escapeHtml(category)}</span>`)
+            .join("")}
+        </div>
+      </section>
+    </div>
+  `;
+}
+
+function renderDiscoverTab() {
+  return `
+    <div class="dashboard-pane">
+      <div class="dashboard-search">
+        <input class="text-input" type="text" value="" placeholder="Search courses, teachers, or live sessions" />
+      </div>
+      ${renderCourseRail("Trending now", dashboardData.newest)}
+      <section class="dashboard-section">
+        <div class="dashboard-section-head"><h3>Explore categories</h3></div>
+        <div class="rail rail--chips">
+          ${dashboardData.categories
+            .map((category) => `<span class="category-chip">${escapeHtml(category)}</span>`)
+            .join("")}
+        </div>
+      </section>
+    </div>
+  `;
+}
+
+function renderLearningTab() {
+  return `
+    <div class="dashboard-pane">
+      ${renderCourseRail("Continue learning", dashboardData.watching)}
+      ${renderCourseRail("Saved for later", dashboardData.bookmarks)}
+    </div>
+  `;
+}
+
+function renderMessagesTab() {
+  return `
+    <div class="dashboard-pane messages-pane">
+      ${dashboardData.messages
+        .map(
+          (message) => `
+            <article class="message-card">
+              <strong>${escapeHtml(message.title)}</strong>
+              <p>${escapeHtml(message.text)}</p>
+            </article>
+          `
+        )
+        .join("")}
+    </div>
+  `;
+}
+
+function renderProfileTab() {
+  return `
+    <div class="dashboard-pane">
+      <article class="profile-card">
+        <strong>${escapeHtml(getDisplayName(getAnswer("name")))}</strong>
+        <span>${escapeHtml(getAnswer("email") || "you@example.com")}</span>
+      </article>
+      <div class="settings-list">
+        ${[
+          "Notifications",
+          "Download on Wi-Fi only",
+          "Manage Subscription",
+          "Logout",
+          "Delete account",
+        ]
+          .map(
+            (item) => `
+              <button type="button" class="settings-item">${escapeHtml(item)}</button>
+            `
+          )
+          .join("")}
+      </div>
+    </div>
+  `;
+}
+
+function renderDashboardStep() {
+  const tabs = [
+    { id: "home", label: "Home" },
+    { id: "discover", label: "Discover" },
+    { id: "learning", label: "My Learning" },
+    { id: "messages", label: "Messages" },
+    { id: "profile", label: "Profile" },
+  ];
+
+  const contentByTab = {
+    home: renderHomeTab(),
+    discover: renderDiscoverTab(),
+    learning: renderLearningTab(),
+    messages: renderMessagesTab(),
+    profile: renderProfileTab(),
+  };
+
+  return `
+    <article class="step app-screen">
+      <div class="app-topbar">
+        <div class="brand">
+          <span class="brand-mark">&#10048;</span>
+          <span class="brand-text">NEWMINDSTART</span>
+        </div>
+      </div>
+
+      <div class="app-body">
+        ${contentByTab[state.appTab] || contentByTab.home}
+      </div>
+
+      <nav class="mobile-tabs">
+        ${tabs
+          .map(
+            (tab) => `
+              <button
+                type="button"
+                class="mobile-tab ${state.appTab === tab.id ? "mobile-tab--active" : ""}"
+                data-action="switch-tab"
+                data-tab="${tab.id}"
+              >
+                ${escapeHtml(tab.label)}
+              </button>
+            `
+          )
+          .join("")}
+      </nav>
     </article>
   `;
 }
@@ -1092,7 +1460,7 @@ function renderStep() {
     appEl.innerHTML = renderLoadingStep(step);
     startLoadingSequence(step.duration || 3500);
   } else if (step.type === "final") {
-    appEl.innerHTML = renderFinalStep();
+    appEl.innerHTML = state.dashboardOpen ? renderDashboardStep() : renderFinalStep();
   }
 
   updateHeader();
@@ -1115,7 +1483,7 @@ function updateHeader() {
   const hideBack =
     state.currentStepIndex === 0 ||
     step.type === "loading" ||
-    step.type === "final";
+    (step.type === "final" && !state.checkoutOpen);
 
   backButtonEl.disabled = hideBack;
 }
@@ -1181,6 +1549,35 @@ function previousStep() {
   const step = getCurrentStep();
   if (step.type === "loading" || step.type === "final") return;
   goToStep(state.currentStepIndex - 1);
+}
+
+function updateCheckoutField(field, value) {
+  state.checkoutForm[field] = value;
+}
+
+function openCheckout() {
+  const email = String(getAnswer("email") || "").trim();
+  state.checkoutForm.email = state.checkoutForm.email || email;
+  state.checkoutOpen = true;
+  renderStep();
+}
+
+function closeCheckout() {
+  state.checkoutOpen = false;
+  renderStep();
+}
+
+function completePurchase() {
+  const { email, cardName, cardNumber, expiry, cvc } = state.checkoutForm;
+  if (!email || !cardName || !cardNumber || !expiry || !cvc) {
+    showError("Please complete the payment form.");
+    return;
+  }
+
+  state.checkoutOpen = false;
+  state.dashboardOpen = true;
+  state.appTab = "home";
+  renderStep();
 }
 
 function startLoadingSequence(durationMs) {
@@ -1261,10 +1658,58 @@ appEl.addEventListener("click", (event) => {
 
   if (action === "restart") {
     state.answers = {};
+    state.checkoutOpen = false;
+    state.dashboardOpen = false;
+    state.selectedPlan = "7d";
+    state.appTab = "home";
+    state.checkoutForm = {
+      email: "",
+      cardName: "",
+      cardNumber: "",
+      expiry: "",
+      cvc: "",
+    };
     goToStep(0);
+    return;
+  }
+
+  if (action === "choose-plan") {
+    state.selectedPlan = target.dataset.plan || "7d";
+    renderStep();
+    return;
+  }
+
+  if (action === "open-checkout") {
+    openCheckout();
+    return;
+  }
+
+  if (action === "close-checkout") {
+    closeCheckout();
+    return;
+  }
+
+  if (action === "complete-purchase") {
+    completePurchase();
+    return;
+  }
+
+  if (action === "switch-tab") {
+    state.appTab = target.dataset.tab || "home";
+    renderStep();
   }
 });
 
+appEl.addEventListener("input", (event) => {
+  const target = event.target.closest("[data-checkout-field]");
+  if (!target) return;
+  updateCheckoutField(target.dataset.checkoutField, target.value);
+});
+
 backButtonEl.addEventListener("click", previousStep);
+
+window.state = state;
+window.steps = steps;
+window.goToStep = goToStep;
 
 renderStep();
