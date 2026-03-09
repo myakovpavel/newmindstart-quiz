@@ -1,3 +1,4 @@
 node_modules/
 tmp/
+.cf-deploy-20260309/
 .DS_Store
