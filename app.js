@@ -820,10 +820,25 @@ function renderHeroStep(step) {
         <div class="step-actions">
           <button type="button" class="btn btn-primary" data-action="next-step">${escapeHtml(step.cta)}</button>
         </div>
+        <div class="hero-shortcuts">
+          <button type="button" class="shortcut-link" data-action="open-shortcut" data-target="offer">Offer preview</button>
+          <button type="button" class="shortcut-link" data-action="open-shortcut" data-target="checkout">Checkout demo</button>
+          <button type="button" class="shortcut-link" data-action="open-shortcut" data-target="dashboard">App preview</button>
+        </div>
       </div>
 
       <div class="hero-visual" aria-hidden="true">
         <div class="hero-overlay"></div>
+        <div class="hero-shape hero-shape--sun"></div>
+        <div class="hero-shape hero-shape--orb"></div>
+        <div class="hero-figure">
+          <div class="hero-figure-head"></div>
+          <div class="hero-figure-body"></div>
+        </div>
+        <div class="hero-floating hero-floating--left">
+          <strong>Today</strong>
+          <span>Focus reset</span>
+        </div>
         <div class="hero-device">
           <div class="hero-device-header">
             <span>Today</span>
@@ -1580,6 +1595,40 @@ function completePurchase() {
   renderStep();
 }
 
+function openShortcut(target) {
+  state.answers.name = state.answers.name || "Alex";
+  state.answers.email = state.answers.email || "test@example.com";
+  state.selectedPlan = state.selectedPlan || "7d";
+
+  if (target === "offer") {
+    state.checkoutOpen = false;
+    state.dashboardOpen = false;
+    goToStep(steps.length - 1);
+    return;
+  }
+
+  if (target === "checkout") {
+    state.checkoutOpen = true;
+    state.dashboardOpen = false;
+    state.checkoutForm = {
+      email: state.answers.email,
+      cardName: "Alex Stone",
+      cardNumber: "4242 4242 4242 4242",
+      expiry: "12 / 28",
+      cvc: "123",
+    };
+    goToStep(steps.length - 1);
+    return;
+  }
+
+  if (target === "dashboard") {
+    state.checkoutOpen = false;
+    state.dashboardOpen = true;
+    state.appTab = "home";
+    goToStep(steps.length - 1);
+  }
+}
+
 function startLoadingSequence(durationMs) {
   const loaderFill = document.getElementById("loaderFill");
   const loaderText = document.getElementById("loaderText");
@@ -1676,6 +1725,11 @@ appEl.addEventListener("click", (event) => {
   if (action === "choose-plan") {
     state.selectedPlan = target.dataset.plan || "7d";
     renderStep();
+    return;
+  }
+
+  if (action === "open-shortcut") {
+    openShortcut(target.dataset.target);
     return;
   }
 

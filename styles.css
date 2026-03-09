@@ -197,6 +197,27 @@ body {
   gap: 16px;
 }
 
+.hero-shortcuts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 2px;
+}
+
+.shortcut-link {
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: rgba(21, 21, 21, 0.4);
+  font: inherit;
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: underline;
+  text-decoration-color: rgba(21, 21, 21, 0.14);
+  text-underline-offset: 3px;
+}
+
 .hero-copy h1,
 .question-title {
   margin: 0;
@@ -263,6 +284,82 @@ body {
   border: 1px solid rgba(255, 255, 255, 0.72);
   box-shadow: 0 22px 36px rgba(0, 0, 0, 0.08);
   backdrop-filter: blur(18px);
+}
+
+.hero-shape {
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0.95;
+}
+
+.hero-shape--sun {
+  top: 12%;
+  left: 10%;
+  width: 94px;
+  height: 94px;
+  background: radial-gradient(circle, rgba(255, 233, 173, 0.95) 0%, rgba(255, 196, 102, 0.7) 58%, transparent 74%);
+}
+
+.hero-shape--orb {
+  top: 14%;
+  right: 14%;
+  width: 112px;
+  height: 112px;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.48) 0%, rgba(255, 255, 255, 0.08) 72%, transparent 78%);
+}
+
+.hero-figure {
+  position: absolute;
+  left: 10%;
+  bottom: 0;
+  width: 42%;
+  height: 68%;
+}
+
+.hero-figure-head {
+  position: absolute;
+  top: 10%;
+  left: 28%;
+  width: 32%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: linear-gradient(180deg, #ffd6bf 0%, #f6b897 100%);
+  box-shadow: 0 12px 24px rgba(145, 72, 19, 0.12);
+}
+
+.hero-figure-body {
+  position: absolute;
+  bottom: 0;
+  left: 2%;
+  width: 86%;
+  height: 70%;
+  border-radius: 34px 34px 0 0;
+  background: linear-gradient(180deg, #ffac6c 0%, #f28b44 100%);
+  box-shadow: 0 18px 32px rgba(160, 78, 19, 0.16);
+}
+
+.hero-floating {
+  position: absolute;
+  left: 12px;
+  top: 18px;
+  z-index: 1;
+  padding: 12px 14px;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 14px 24px rgba(17, 17, 17, 0.06);
+}
+
+.hero-floating strong {
+  display: block;
+  font-size: 0.8rem;
+}
+
+.hero-floating span {
+  display: block;
+  margin-top: 2px;
+  color: var(--text-muted);
+  font-size: 0.78rem;
 }
 
 .hero-device-header {
